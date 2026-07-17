@@ -356,7 +356,7 @@
   <div class="kpi-grid">
     <div class="kpi">
       <div class="kpi-label">Expérience</div>
-      <div class="kpi-value">7+</div>
+      <div class="kpi-value" id="kpi-years">7+</div>
       <div class="kpi-sub">années en data analyse</div>
     </div>
     <div class="kpi">
@@ -383,7 +383,7 @@
     <h2 class="section-title">Profil</h2>
   </div>
   <div class="profil-text">
-    <p>Data Analyst avec plus de 7 ans d'expérience dans l'analyse, la structuration et la valorisation de données. Spécialisée dans la datavisualisation, l'amélioration continue et la qualité des données.</p>
+    <p>Data Analyst avec <span id="profil-years">7+</span> ans d'expérience dans l'analyse, la structuration et la valorisation de données. Spécialisée dans la datavisualisation, l'amélioration continue et la qualité des données.</p>
     <p>Habituée à collaborer avec des équipes pluridisciplinaires, je traduis les besoins en solutions concrètes : reporting automatisé, indicateurs de pilotage, optimisation de processus, accompagnement des utilisateurs.</p>
     <p>Une double compétence — analyse de données et pilotage de projet — acquise sur le terrain et complétée par une formation en systèmes d'information et stratégie d'entreprise (Université Clermont Auvergne, HEC Montréal).</p>
   </div>
@@ -595,6 +595,31 @@
     });
   }, {threshold:.12});
   els.forEach(el=>io.observe(el));
+  // Calcul dynamique de l'expérience professionnelle
+  // Règle : point de départ = premier poste (mars 2018) moins les 6 premiers mois
+  // (stage chez Groupement des Mousquetaires, non comptabilisé comme expérience pro)
+  // Affichage : "N" si exactement N années révolues, "N+" si strictement entre N et N+1
+  (function(){
+    const startDate = new Date(2018, 8, 1); // 1er septembre 2018 (mars 2018 + 6 mois de stage exclus)
+    const now = new Date();
+    let years = now.getFullYear() - startDate.getFullYear();
+    const hasHadAnniversaryThisYear =
+      (now.getMonth() > startDate.getMonth()) ||
+      (now.getMonth() === startDate.getMonth() && now.getDate() >= startDate.getDate());
+    if (!hasHadAnniversaryThisYear) years -= 1;
+
+    // vérifie si l'anniversaire exact tombe aujourd'hui (années entières exactes)
+    const isExactYear = hasHadAnniversaryThisYear
+      ? (now.getMonth() === startDate.getMonth() && now.getDate() === startDate.getDate())
+      : false;
+
+    const label = isExactYear ? String(years) : String(years) + '+';
+
+    const kpiEl = document.getElementById('kpi-years');
+    const profilEl = document.getElementById('profil-years');
+    if (kpiEl) kpiEl.textContent = label;
+    if (profilEl) profilEl.textContent = label;
+  })();
 </script>
 
 </body>
