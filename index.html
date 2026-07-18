@@ -356,7 +356,7 @@
   <div class="kpi-grid">
     <div class="kpi">
       <div class="kpi-label">Expérience</div>
-      <div class="kpi-value" id="kpi-years" style="font-size:26px;">7+</div>
+      <div class="kpi-value" id="kpi-years">7+</div>
       <div class="kpi-sub">années en data analyse</div>
     </div>
     <div class="kpi">
@@ -613,12 +613,13 @@
       ? (now.getMonth() === startDate.getMonth() && now.getDate() === startDate.getDate())
       : false;
 
-    const label = isExactYear ? String(years) : 'plus de ' + String(years);
+    const cardLabel = isExactYear ? String(years) : String(years) + '+';
+    const profilLabel = isExactYear ? String(years) : 'plus de ' + String(years);
 
     const kpiEl = document.getElementById('kpi-years');
     const profilEl = document.getElementById('profil-years');
-    if (kpiEl) kpiEl.textContent = label;
-    if (profilEl) profilEl.textContent = label;
+    if (kpiEl) kpiEl.textContent = cardLabel;
+    if (profilEl) profilEl.textContent = profilLabel;
   })();
 </script>
 
