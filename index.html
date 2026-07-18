@@ -335,6 +335,53 @@
     color:#7E8FA0;
   }
 
+  /* ---------- LANGUAGE SWITCHER ---------- */
+  .lang-switcher{
+    position:absolute;
+    top:28px;
+    right:32px;
+    z-index:10;
+  }
+  @media (max-width:640px){.lang-switcher{top:20px; right:20px;}}
+  .lang-btn{
+    display:flex; align-items:center; gap:6px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.22);
+    color:#EDEFEA;
+    padding:8px 12px;
+    cursor:pointer;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:.04em;
+  }
+  .lang-btn:hover{background:rgba(255,255,255,.12);}
+  .lang-btn svg{width:15px; height:15px; flex-shrink:0;}
+  .lang-menu{
+    position:absolute;
+    top:calc(100% + 6px);
+    right:0;
+    background:var(--ink-2);
+    border:1px solid rgba(255,255,255,.22);
+    min-width:100px;
+    display:none;
+    flex-direction:column;
+  }
+  .lang-switcher.open .lang-menu,
+  .lang-switcher:hover .lang-menu{display:flex;}
+  .lang-option{
+    padding:9px 14px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:#C3CCD3;
+    cursor:pointer;
+    text-align:left;
+    background:none; border:none;
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .lang-option:last-child{border-bottom:none;}
+  .lang-option:hover{background:rgba(255,255,255,.08); color:#EDEFEA;}
+  .lang-option.active{color:var(--gold);}
+
   /* reveal on scroll */
   .reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease;}
   .reveal.in{opacity:1; transform:translateY(0);}
@@ -347,32 +394,43 @@
 <body>
 
 <div class="hero">
+  <div class="lang-switcher" id="langSwitcher">
+    <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+      <span id="langBtnLabel">FR</span>
+    </button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option active" data-lang="fr">Français</button>
+      <button class="lang-option" data-lang="en">English</button>
+      <button class="lang-option" data-lang="it">Italiano</button>
+    </div>
+  </div>
   <div class="wrap hero-inner">
-    <div class="eyebrow">Disponible immédiatement — Île-de-France</div>
+    <div class="eyebrow" data-i18n="eyebrow">Disponible immédiatement — Île-de-France</div>
     <h1 class="name display">Myriam Ghoulem</h1>
-    <div class="role-line"><strong>Data Analyst</strong> — analyse, structuration &amp; valorisation de données</div>
+    <div class="role-line" data-i18n="role_line"><strong>Data Analyst</strong> — analyse, structuration &amp; valorisation de données</div>
     <div class="location-line mono">Chennevières-sur-Marne (94) · 07 86 81 99 28 · <a href="mailto:dubostmg@gmail.com" style="color:#8695A3;">dubostmg@gmail.com</a> · <a href="https://www.linkedin.com/in/myrg/" target="_blank" rel="noopener" style="color:#8695A3;">linkedin.com/in/myrg</a></div>
   </div>
   <div class="kpi-grid">
     <div class="kpi">
-      <div class="kpi-label">Expérience</div>
+      <div class="kpi-label" data-i18n="kpi_label_experience">Expérience</div>
       <div class="kpi-value" id="kpi-years">7+</div>
-      <div class="kpi-sub">années en data analyse</div>
+      <div class="kpi-sub" data-i18n="kpi_sub_experience">années en data analyse</div>
     </div>
     <div class="kpi">
-      <div class="kpi-label">Outils maîtrisés</div>
+      <div class="kpi-label" data-i18n="kpi_label_tools">Outils maîtrisés</div>
       <div class="kpi-value">13</div>
       <div class="kpi-sub">SQL, Power BI, Python…</div>
     </div>
     <div class="kpi">
-      <div class="kpi-label">Langues</div>
+      <div class="kpi-label" data-i18n="kpi_label_languages">Langues</div>
       <div class="kpi-value">3</div>
-      <div class="kpi-sub">FR natif · EN courant · IT bilingue</div>
+      <div class="kpi-sub" data-i18n="kpi_sub_languages">FR natif · EN courant · IT bilingue</div>
     </div>
     <div class="kpi">
-      <div class="kpi-label">Certification</div>
+      <div class="kpi-label" data-i18n="kpi_label_certification">Certification</div>
       <div class="kpi-value mono" style="font-size:19px; padding-top:6px;">TOSA Python</div>
-      <div class="kpi-sub">en cours</div>
+      <div class="kpi-sub" data-i18n="kpi_sub_certification">en cours</div>
     </div>
   </div>
 </div>
@@ -380,12 +438,12 @@
 <section class="wrap reveal" id="profil">
   <div class="section-head">
     <span class="section-num mono">01</span>
-    <h2 class="section-title">Profil</h2>
+    <h2 class="section-title" data-i18n="section_profil">Profil</h2>
   </div>
   <div class="profil-text">
-    <p>Data Analyst avec <span id="profil-years">7+</span> ans d'expérience dans l'analyse, la structuration et la valorisation de données. Spécialisée dans la datavisualisation, l'amélioration continue et la qualité des données.</p>
-    <p>Habituée à collaborer avec des équipes pluridisciplinaires, je traduis les besoins en solutions concrètes : reporting automatisé, indicateurs de pilotage, optimisation de processus, accompagnement des utilisateurs.</p>
-    <p>Une double compétence — analyse de données et pilotage de projet — acquise sur le terrain et complétée par une formation en systèmes d'information et stratégie d'entreprise (Université Clermont Auvergne, HEC Montréal).</p>
+    <p data-i18n="profil_p1">Data Analyst avec <span id="profil-years">7+</span> ans d'expérience dans l'analyse, la structuration et la valorisation de données. Spécialisée dans la datavisualisation, l'amélioration continue et la qualité des données.</p>
+    <p data-i18n="profil_p2">Habituée à collaborer avec des équipes pluridisciplinaires, je traduis les besoins en solutions concrètes : reporting automatisé, indicateurs de pilotage, optimisation de processus, accompagnement des utilisateurs.</p>
+    <p data-i18n="profil_p3">Une double compétence — analyse de données et pilotage de projet — acquise sur le terrain et complétée par une formation en systèmes d'information et stratégie d'entreprise (Université Clermont Auvergne, HEC Montréal).</p>
   </div>
 </section>
 
@@ -394,47 +452,47 @@
   <div class="wrap" style="padding:0;">
     <div class="section-head">
       <span class="section-num mono">02</span>
-      <h2 class="section-title">Expérience</h2>
+      <h2 class="section-title" data-i18n="section_experience">Expérience</h2>
     </div>
 
     <div class="exp-item">
       <div class="exp-top">
-        <span class="exp-title">Chargée d'études</span>
-        <span class="exp-dates mono">SEPT. 2020 → FÉV. 2026 · 5 ans et 5 mois</span>
+        <span class="exp-title" data-i18n="exp1_title">Chargée d'études</span>
+        <span class="exp-dates mono" data-i18n="exp1_dates">SEPT. 2020 → FÉV. 2026 · 5 ans et 5 mois</span>
       </div>
       <div class="exp-company">Groupe Saretec, Créteil</div>
       <div class="gantt-track"><div class="gantt-bar" style="width:100%;"></div></div>
       <ul class="exp-desc">
-        <li>Recueil et analyse des besoins métiers auprès de multiples parties prenantes ; cadrage fonctionnel des demandes.</li>
-        <li>Conception et déploiement de dashboards Power BI pour le pilotage de la performance.</li>
-        <li>Structuration et automatisation des processus de reporting, réduisant les délais de production et fiabilisant les livrables.</li>
-        <li>Accompagnement des utilisateurs : formation, support, documentation.</li>
+        <li data-i18n="exp1_b1">Recueil et analyse des besoins métiers auprès de multiples parties prenantes ; cadrage fonctionnel des demandes.</li>
+        <li data-i18n="exp1_b2">Conception et déploiement de dashboards Power BI pour le pilotage de la performance.</li>
+        <li data-i18n="exp1_b3">Structuration et automatisation des processus de reporting, réduisant les délais de production et fiabilisant les livrables.</li>
+        <li data-i18n="exp1_b4">Accompagnement des utilisateurs : formation, support, documentation.</li>
       </ul>
     </div>
 
     <div class="exp-item">
       <div class="exp-top">
-        <span class="exp-title">Gestionnaire Master Data</span>
-        <span class="exp-dates mono">FÉV. 2019 → JAN. 2020 · 11 mois</span>
+        <span class="exp-title" data-i18n="exp2_title">Gestionnaire Master Data</span>
+        <span class="exp-dates mono" data-i18n="exp2_dates">FÉV. 2019 → JAN. 2020 · 11 mois</span>
       </div>
       <div class="exp-company">Continental, Le Meux</div>
       <div class="gantt-track"><div class="gantt-bar" style="width:18%;"></div></div>
       <ul class="exp-desc">
-        <li>Analyse de données et production de reportings pour différents services métiers.</li>
-        <li>Exploitation et interrogation de bases de données via SQL.</li>
+        <li data-i18n="exp2_b1">Analyse de données et production de reportings pour différents services métiers.</li>
+        <li data-i18n="exp2_b2">Exploitation et interrogation de bases de données via SQL.</li>
       </ul>
     </div>
 
     <div class="exp-item">
       <div class="exp-top">
-        <span class="exp-title">Data Miner</span>
-        <span class="exp-dates mono">MARS 2018 → FÉV. 2019 · 11 mois</span>
+        <span class="exp-title" data-i18n="exp3_title">Data Miner</span>
+        <span class="exp-dates mono" data-i18n="exp3_dates">MARS 2018 → FÉV. 2019 · 11 mois</span>
       </div>
       <div class="exp-company">Groupement des Mousquetaires, Bondoufle</div>
       <div class="gantt-track"><div class="gantt-bar" style="width:18%;"></div></div>
       <ul class="exp-desc">
-        <li>Gestion et évolution de reportings existants ; analyse de données clients et produits.</li>
-        <li>Réponse à des problématiques métiers via des requêtes SQL.</li>
+        <li data-i18n="exp3_b1">Gestion et évolution de reportings existants ; analyse de données clients et produits.</li>
+        <li data-i18n="exp3_b2">Réponse à des problématiques métiers via des requêtes SQL.</li>
       </ul>
     </div>
   </div>
@@ -443,23 +501,23 @@
 <section class="wrap reveal" id="competences">
   <div class="section-head">
     <span class="section-num mono">03</span>
-    <h2 class="section-title">Compétences</h2>
+    <h2 class="section-title" data-i18n="section_competences">Compétences</h2>
   </div>
 
   <div class="skill-group">
-    <div class="skill-cat">Analyse &amp; gestion de projet</div>
+    <div class="skill-cat" data-i18n="skillcat_analyse">Analyse &amp; gestion de projet</div>
     <div class="chips">
-      <span class="chip accent">Recueil des besoins métiers</span>
-      <span class="chip accent">Pilotage de projet</span>
-      <span class="chip accent">Mise en place de KPI</span>
-      <span class="chip accent">Amélioration continue</span>
-      <span class="chip accent">Qualité des données</span>
-      <span class="chip accent">IA appliquée à l'analyse de données</span>
+      <span class="chip accent" data-i18n="chip_besoins">Recueil des besoins métiers</span>
+      <span class="chip accent" data-i18n="chip_pilotage">Pilotage de projet</span>
+      <span class="chip accent" data-i18n="chip_kpi">Mise en place de KPI</span>
+      <span class="chip accent" data-i18n="chip_amelioration">Amélioration continue</span>
+      <span class="chip accent" data-i18n="chip_qualite">Qualité des données</span>
+      <span class="chip accent" data-i18n="chip_ia">IA appliquée à l'analyse de données</span>
     </div>
   </div>
 
   <div class="skill-group">
-    <div class="skill-cat">Techniques</div>
+    <div class="skill-cat" data-i18n="skillcat_techniques">Techniques</div>
     <div class="chips">
       <span class="chip">SQL</span>
       <span class="chip">Power BI</span>
@@ -478,21 +536,21 @@
   </div>
 
   <div class="skill-group">
-    <div class="skill-cat">Soft skills</div>
+    <div class="skill-cat" data-i18n="skillcat_soft">Soft skills</div>
     <div class="chips">
-      <span class="chip">Esprit d'analyse</span>
-      <span class="chip">Rigueur</span>
-      <span class="chip">Engagement</span>
-      <span class="chip">Curiosité intellectuelle</span>
+      <span class="chip" data-i18n="chip_esprit">Esprit d'analyse</span>
+      <span class="chip" data-i18n="chip_rigueur">Rigueur</span>
+      <span class="chip" data-i18n="chip_engagement">Engagement</span>
+      <span class="chip" data-i18n="chip_curiosite">Curiosité intellectuelle</span>
     </div>
   </div>
 
   <div class="skill-group">
-    <div class="skill-cat">Langues</div>
+    <div class="skill-cat" data-i18n="skillcat_langues">Langues</div>
     <div class="chips">
-      <span class="chip">Français — natif</span>
-      <span class="chip">Anglais — courant</span>
-      <span class="chip">Italien — bilingue</span>
+      <span class="chip" data-i18n="chip_fr">Français — natif</span>
+      <span class="chip" data-i18n="chip_en">Anglais — courant</span>
+      <span class="chip" data-i18n="chip_it">Italien — bilingue</span>
     </div>
   </div>
 </section>
@@ -501,41 +559,41 @@
   <div class="wrap" style="padding:0;">
     <div class="section-head">
       <span class="section-num mono">04</span>
-      <h2 class="section-title">Formation</h2>
+      <h2 class="section-title" data-i18n="section_formation">Formation</h2>
     </div>
 
     <div class="edu-item">
       <div class="edu-year mono">2026</div>
       <div>
-        <div class="edu-title">Python — Préparation certification TOSA <span class="badge-progress">en cours</span></div>
-        <div class="edu-school">L'École Française, à distance</div>
+        <div class="edu-title" data-i18n="edu1_title">Python — Préparation certification TOSA <span class="badge-progress">en cours</span></div>
+        <div class="edu-school" data-i18n="edu1_school">L'École Française, à distance</div>
       </div>
     </div>
     <div class="edu-item">
       <div class="edu-year mono">2018</div>
       <div>
-        <div class="edu-title">Master Stratégie Internet et Pilotage de Projets d'Entreprise</div>
+        <div class="edu-title" data-i18n="edu2_title">Master Stratégie Internet et Pilotage de Projets d'Entreprise</div>
         <div class="edu-school">Université Clermont Auvergne, Vichy</div>
       </div>
     </div>
     <div class="edu-item">
       <div class="edu-year mono">2014</div>
       <div>
-        <div class="edu-title">Certificat Systèmes d'Information et Analyse d'Affaires</div>
+        <div class="edu-title" data-i18n="edu3_title">Certificat Systèmes d'Information et Analyse d'Affaires</div>
         <div class="edu-school">HEC Montréal, Montréal, QC, Canada</div>
       </div>
     </div>
     <div class="edu-item">
       <div class="edu-year mono">2009</div>
       <div>
-        <div class="edu-title">Certificat Informatique appliquée</div>
+        <div class="edu-title" data-i18n="edu4_title">Certificat Informatique appliquée</div>
         <div class="edu-school">Université de Montréal, Montréal, QC, Canada</div>
       </div>
     </div>
     <div class="edu-item">
       <div class="edu-year mono">2007</div>
       <div>
-        <div class="edu-title">Baccalauréat en Administration des Affaires</div>
+        <div class="edu-title" data-i18n="edu5_title">Baccalauréat en Administration des Affaires</div>
         <div class="edu-school">HEC Montréal, Montréal, QC, Canada</div>
       </div>
     </div>
@@ -545,28 +603,28 @@
 <section class="wrap reveal" id="projets">
   <div class="section-head">
     <span class="section-num mono">05</span>
-    <h2 class="section-title">Projets</h2>
+    <h2 class="section-title" data-i18n="section_projets">Projets</h2>
   </div>
   <div class="proj-grid">
     <div class="proj-card">
       <div>
-        <div class="proj-status">// en construction</div>
-        <div class="proj-title">Dashboard Power BI — à venir</div>
-        <div class="proj-desc">Projet démonstratif en cours de construction, publié prochainement sur Power BI Public.</div>
+        <div class="proj-status" data-i18n="proj1_status">// en construction</div>
+        <div class="proj-title" data-i18n="proj1_title">Dashboard Power BI — à venir</div>
+        <div class="proj-desc" data-i18n="proj1_desc">Projet démonstratif en cours de construction, publié prochainement sur Power BI Public.</div>
       </div>
     </div>
     <div class="proj-card">
       <div>
-        <div class="proj-status">// en construction</div>
-        <div class="proj-title">Script Python — à venir</div>
-        <div class="proj-desc">Automatisation de nettoyage de données, réalisée en parallèle de la certification TOSA.</div>
+        <div class="proj-status" data-i18n="proj2_status">// en construction</div>
+        <div class="proj-title" data-i18n="proj2_title">Script Python — à venir</div>
+        <div class="proj-desc" data-i18n="proj2_desc">Automatisation de nettoyage de données, réalisée en parallèle de la certification TOSA.</div>
       </div>
     </div>
     <div class="proj-card">
       <div>
-        <div class="proj-status">// à définir</div>
-        <div class="proj-title">Prochain projet</div>
-        <div class="proj-desc">Emplacement réservé pour un futur projet portfolio.</div>
+        <div class="proj-status" data-i18n="proj3_status">// à définir</div>
+        <div class="proj-title" data-i18n="proj3_title">Prochain projet</div>
+        <div class="proj-desc" data-i18n="proj3_desc">Emplacement réservé pour un futur projet portfolio.</div>
       </div>
     </div>
   </div>
@@ -574,10 +632,10 @@
 
 <footer>
   <div class="wrap">
-    <div class="foot-title display">Discutons de votre besoin en data.</div>
-    <div class="foot-sub">Disponible immédiatement pour un poste de Data Analyst en Île-de-France, en présentiel ou hybride.</div>
+    <div class="foot-title display" data-i18n="foot_title">Discutons de votre besoin en data.</div>
+    <div class="foot-sub" data-i18n="foot_sub">Disponible immédiatement pour un poste de Data Analyst en Île-de-France, en présentiel ou hybride.</div>
     <div class="foot-actions">
-      <a href="mailto:dubostmg@gmail.com" class="btn btn-primary">Écrire un email</a>
+      <a href="mailto:dubostmg@gmail.com" class="btn btn-primary" data-i18n="foot_btn_email">Écrire un email</a>
       <a href="tel:+33786819928" class="btn btn-ghost">07 86 81 99 28</a>
     </div>
     <div class="foot-bottom">
@@ -595,31 +653,284 @@
     });
   }, {threshold:.12});
   els.forEach(el=>io.observe(el));
-  // Calcul dynamique de l'expérience professionnelle
+
+  // ============ TRADUCTIONS ============
+  const translations = {
+    fr: {
+      eyebrow: "Disponible immédiatement — Île-de-France",
+      role_line: "<strong>Data Analyst</strong> — analyse, structuration &amp; valorisation de données",
+      kpi_label_experience: "Expérience",
+      kpi_sub_experience: "années en data analyse",
+      kpi_label_tools: "Outils maîtrisés",
+      kpi_label_languages: "Langues",
+      kpi_sub_languages: "FR natif · EN courant · IT bilingue",
+      kpi_label_certification: "Certification",
+      kpi_sub_certification: "en cours",
+      section_profil: "Profil",
+      section_experience: "Expérience",
+      section_competences: "Compétences",
+      section_formation: "Formation",
+      section_projets: "Projets",
+      profil_p1: "Data Analyst avec <span id=\"profil-years\">7+</span> ans d'expérience dans l'analyse, la structuration et la valorisation de données. Spécialisée dans la datavisualisation, l'amélioration continue et la qualité des données.",
+      profil_p2: "Habituée à collaborer avec des équipes pluridisciplinaires, je traduis les besoins en solutions concrètes : reporting automatisé, indicateurs de pilotage, optimisation de processus, accompagnement des utilisateurs.",
+      profil_p3: "Une double compétence — analyse de données et pilotage de projet — acquise sur le terrain et complétée par une formation en systèmes d'information et stratégie d'entreprise (Université Clermont Auvergne, HEC Montréal).",
+      exp1_title: "Chargée d'études",
+      exp1_dates: "SEPT. 2020 → FÉV. 2026 · 5 ans et 5 mois",
+      exp1_b1: "Recueil et analyse des besoins métiers auprès de multiples parties prenantes ; cadrage fonctionnel des demandes.",
+      exp1_b2: "Conception et déploiement de dashboards Power BI pour le pilotage de la performance.",
+      exp1_b3: "Structuration et automatisation des processus de reporting, réduisant les délais de production et fiabilisant les livrables.",
+      exp1_b4: "Accompagnement des utilisateurs : formation, support, documentation.",
+      exp2_title: "Gestionnaire Master Data",
+      exp2_dates: "FÉV. 2019 → JAN. 2020 · 11 mois",
+      exp2_b1: "Analyse de données et production de reportings pour différents services métiers.",
+      exp2_b2: "Exploitation et interrogation de bases de données via SQL.",
+      exp3_title: "Data Miner",
+      exp3_dates: "MARS 2018 → FÉV. 2019 · 11 mois",
+      exp3_b1: "Gestion et évolution de reportings existants ; analyse de données clients et produits.",
+      exp3_b2: "Réponse à des problématiques métiers via des requêtes SQL.",
+      skillcat_analyse: "Analyse &amp; gestion de projet",
+      skillcat_techniques: "Techniques",
+      skillcat_soft: "Soft skills",
+      skillcat_langues: "Langues",
+      chip_besoins: "Recueil des besoins métiers",
+      chip_pilotage: "Pilotage de projet",
+      chip_kpi: "Mise en place de KPI",
+      chip_amelioration: "Amélioration continue",
+      chip_qualite: "Qualité des données",
+      chip_ia: "IA appliquée à l'analyse de données",
+      chip_esprit: "Esprit d'analyse",
+      chip_rigueur: "Rigueur",
+      chip_engagement: "Engagement",
+      chip_curiosite: "Curiosité intellectuelle",
+      chip_fr: "Français — natif",
+      chip_en: "Anglais — courant",
+      chip_it: "Italien — bilingue",
+      edu1_title: "Python — Préparation certification TOSA <span class=\"badge-progress\">en cours</span>",
+      edu1_school: "L'École Française, à distance",
+      edu2_title: "Master Stratégie Internet et Pilotage de Projets d'Entreprise",
+      edu3_title: "Certificat Systèmes d'Information et Analyse d'Affaires",
+      edu4_title: "Certificat Informatique appliquée",
+      edu5_title: "Baccalauréat en Administration des Affaires",
+      proj1_status: "// en construction",
+      proj1_title: "Dashboard Power BI — à venir",
+      proj1_desc: "Projet démonstratif en cours de construction, publié prochainement sur Power BI Public.",
+      proj2_status: "// en construction",
+      proj2_title: "Script Python — à venir",
+      proj2_desc: "Automatisation de nettoyage de données, réalisée en parallèle de la certification TOSA.",
+      proj3_status: "// à définir",
+      proj3_title: "Prochain projet",
+      proj3_desc: "Emplacement réservé pour un futur projet portfolio.",
+      foot_title: "Discutons de votre besoin en data.",
+      foot_sub: "Disponible immédiatement pour un poste de Data Analyst en Île-de-France, en présentiel ou hybride.",
+      foot_btn_email: "Écrire un email",
+      page_title: "Myriam Ghoulem — Data Analyst",
+    },
+    en: {
+      eyebrow: "Available immediately — Paris Region",
+      role_line: "<strong>Data Analyst</strong> — data analysis, structuring &amp; value creation",
+      kpi_label_experience: "Experience",
+      kpi_sub_experience: "years in data analysis",
+      kpi_label_tools: "Tools mastered",
+      kpi_label_languages: "Languages",
+      kpi_sub_languages: "FR native · EN fluent · IT bilingual",
+      kpi_label_certification: "Certification",
+      kpi_sub_certification: "in progress",
+      section_profil: "Profile",
+      section_experience: "Experience",
+      section_competences: "Skills",
+      section_formation: "Education",
+      section_projets: "Projects",
+      profil_p1: "Data Analyst with <span id=\"profil-years\">7+</span> years of experience in data analysis, structuring, and value creation. Specialized in data visualization, continuous improvement, and data quality.",
+      profil_p2: "Used to working with cross-functional teams, I translate business needs into concrete solutions: automated reporting, performance indicators, process optimization, user support.",
+      profil_p3: "A dual expertise — data analysis and project management — built on the job and complemented by training in information systems and corporate strategy (Université Clermont Auvergne, HEC Montréal).",
+      exp1_title: "Data Analyst",
+      exp1_dates: "SEPT. 2020 → FEB. 2026 · 5 years 5 months",
+      exp1_b1: "Gathered and analyzed business needs from multiple stakeholders; defined functional scope for requests.",
+      exp1_b2: "Designed and deployed Power BI dashboards to support performance management.",
+      exp1_b3: "Structured and automated reporting processes, reducing production times and improving deliverable reliability.",
+      exp1_b4: "Supported end users through training, assistance, and documentation.",
+      exp2_title: "Master Data Analyst",
+      exp2_dates: "FEB. 2019 → JAN. 2020 · 11 months",
+      exp2_b1: "Analyzed data and produced reports for various business departments.",
+      exp2_b2: "Queried and maintained databases using SQL.",
+      exp3_title: "Data Miner",
+      exp3_dates: "MAR. 2018 → FEB. 2019 · 11 months",
+      exp3_b1: "Managed and improved existing reports; analyzed customer and product data.",
+      exp3_b2: "Answered business questions through SQL queries.",
+      skillcat_analyse: "Analysis &amp; Project Management",
+      skillcat_techniques: "Technical",
+      skillcat_soft: "Soft skills",
+      skillcat_langues: "Languages",
+      chip_besoins: "Business needs gathering",
+      chip_pilotage: "Project management",
+      chip_kpi: "KPI design",
+      chip_amelioration: "Continuous improvement",
+      chip_qualite: "Data quality",
+      chip_ia: "AI applied to data analysis",
+      chip_esprit: "Analytical mindset",
+      chip_rigueur: "Rigor",
+      chip_engagement: "Commitment",
+      chip_curiosite: "Intellectual curiosity",
+      chip_fr: "French — native",
+      chip_en: "English — fluent",
+      chip_it: "Italian — bilingual",
+      edu1_title: "Python — TOSA Certification Preparation <span class=\"badge-progress\">in progress</span>",
+      edu1_school: "L'École Française, remote",
+      edu2_title: "Master's in Internet Strategy and Corporate Project Management",
+      edu3_title: "Certificate in Information Systems and Business Analysis",
+      edu4_title: "Certificate in Applied Computing",
+      edu5_title: "Bachelor's Degree in Business Administration",
+      proj1_status: "// under construction",
+      proj1_title: "Power BI Dashboard — coming soon",
+      proj1_desc: "Demo project in progress, soon to be published on Power BI Public.",
+      proj2_status: "// under construction",
+      proj2_title: "Python Script — coming soon",
+      proj2_desc: "Data cleaning automation, built alongside the TOSA certification.",
+      proj3_status: "// to be defined",
+      proj3_title: "Next project",
+      proj3_desc: "Placeholder for a future portfolio project.",
+      foot_title: "Let's talk about your data needs.",
+      foot_sub: "Available immediately for a Data Analyst role in the Paris Region, on-site or hybrid.",
+      foot_btn_email: "Send an email",
+      page_title: "Myriam Ghoulem — Data Analyst",
+    },
+    it: {
+      eyebrow: "Disponibile da subito — Île-de-France",
+      role_line: "<strong>Data Analyst</strong> — analisi, strutturazione &amp; valorizzazione dei dati",
+      kpi_label_experience: "Esperienza",
+      kpi_sub_experience: "anni nell'analisi dati",
+      kpi_label_tools: "Strumenti padroneggiati",
+      kpi_label_languages: "Lingue",
+      kpi_sub_languages: "FR madrelingua · EN fluente · IT bilingue",
+      kpi_label_certification: "Certificazione",
+      kpi_sub_certification: "in corso",
+      section_profil: "Profilo",
+      section_experience: "Esperienza",
+      section_competences: "Competenze",
+      section_formation: "Formazione",
+      section_projets: "Progetti",
+      profil_p1: "Data Analyst con <span id=\"profil-years\">7+</span> anni di esperienza nell'analisi, strutturazione e valorizzazione dei dati. Specializzata in data visualization, miglioramento continuo e qualità dei dati.",
+      profil_p2: "Abituata a collaborare con team multidisciplinari, traduco le esigenze in soluzioni concrete: reportistica automatizzata, indicatori di performance, ottimizzazione dei processi, supporto agli utenti.",
+      profil_p3: "Una doppia competenza — analisi dei dati e gestione di progetto — acquisita sul campo e completata da una formazione in sistemi informativi e strategia aziendale (Université Clermont Auvergne, HEC Montréal).",
+      exp1_title: "Data Analyst",
+      exp1_dates: "SET. 2020 → FEB. 2026 · 5 anni e 5 mesi",
+      exp1_b1: "Raccolta e analisi delle esigenze aziendali presso molteplici interlocutori; definizione dell'ambito funzionale delle richieste.",
+      exp1_b2: "Progettazione e implementazione di dashboard Power BI per il monitoraggio delle performance.",
+      exp1_b3: "Strutturazione e automazione dei processi di reportistica, riducendo i tempi di produzione e migliorando l'affidabilità dei risultati.",
+      exp1_b4: "Supporto agli utenti: formazione, assistenza, documentazione.",
+      exp2_title: "Master Data Analyst",
+      exp2_dates: "FEB. 2019 → GEN. 2020 · 11 mesi",
+      exp2_b1: "Analisi dei dati e produzione di report per diversi reparti aziendali.",
+      exp2_b2: "Interrogazione e gestione di database tramite SQL.",
+      exp3_title: "Data Miner",
+      exp3_dates: "MAR. 2018 → FEB. 2019 · 11 mesi",
+      exp3_b1: "Gestione ed evoluzione di report esistenti; analisi dei dati clienti e prodotti.",
+      exp3_b2: "Risposta a quesiti aziendali tramite query SQL.",
+      skillcat_analyse: "Analisi &amp; gestione di progetto",
+      skillcat_techniques: "Competenze tecniche",
+      skillcat_soft: "Soft skills",
+      skillcat_langues: "Lingue",
+      chip_besoins: "Raccolta delle esigenze aziendali",
+      chip_pilotage: "Gestione di progetto",
+      chip_kpi: "Definizione di KPI",
+      chip_amelioration: "Miglioramento continuo",
+      chip_qualite: "Qualità dei dati",
+      chip_ia: "IA applicata all'analisi dei dati",
+      chip_esprit: "Spirito di analisi",
+      chip_rigueur: "Rigore",
+      chip_engagement: "Impegno",
+      chip_curiosite: "Curiosità intellettuale",
+      chip_fr: "Francese — madrelingua",
+      chip_en: "Inglese — fluente",
+      chip_it: "Italiano — bilingue",
+      edu1_title: "Python — Preparazione certificazione TOSA <span class=\"badge-progress\">in corso</span>",
+      edu1_school: "L'École Française, a distanza",
+      edu2_title: "Master in Strategia Internet e Gestione di Progetti Aziendali",
+      edu3_title: "Certificato in Sistemi Informativi e Analisi Aziendale",
+      edu4_title: "Certificato in Informatica Applicata",
+      edu5_title: "Laurea in Amministrazione Aziendale",
+      proj1_status: "// in costruzione",
+      proj1_title: "Dashboard Power BI — in arrivo",
+      proj1_desc: "Progetto dimostrativo in fase di realizzazione, pubblicato a breve su Power BI Public.",
+      proj2_status: "// in costruzione",
+      proj2_title: "Script Python — in arrivo",
+      proj2_desc: "Automazione della pulizia dei dati, realizzata parallelamente alla certificazione TOSA.",
+      proj3_status: "// da definire",
+      proj3_title: "Prossimo progetto",
+      proj3_desc: "Spazio riservato per un futuro progetto portfolio.",
+      foot_title: "Parliamo delle vostre esigenze in ambito data.",
+      foot_sub: "Disponibile da subito per un ruolo di Data Analyst in Île-de-France, in presenza o ibrido.",
+      foot_btn_email: "Scrivi un'email",
+      page_title: "Myriam Ghoulem — Data Analyst",
+    }
+  };
+
+  // ============ CALCUL DYNAMIQUE DE L'EXPÉRIENCE ============
   // Règle : point de départ = premier poste (mars 2018) moins les 6 premiers mois
   // (stage chez Groupement des Mousquetaires, non comptabilisé comme expérience pro)
-  // Affichage : "N" si exactement N années révolues, "N+" si strictement entre N et N+1
-  (function(){
-    const startDate = new Date(2018, 8, 1); // 1er septembre 2018 (mars 2018 + 6 mois de stage exclus)
+  // Carte KPI : "N" si années exactes, "N+" sinon — Profil : "N" ou "plus de/over/oltre N" selon la langue
+  function updateExperienceLabels(lang){
+    const startDate = new Date(2018, 8, 1);
     const now = new Date();
     let years = now.getFullYear() - startDate.getFullYear();
     const hasHadAnniversaryThisYear =
       (now.getMonth() > startDate.getMonth()) ||
       (now.getMonth() === startDate.getMonth() && now.getDate() >= startDate.getDate());
     if (!hasHadAnniversaryThisYear) years -= 1;
-
-    // vérifie si l'anniversaire exact tombe aujourd'hui (années entières exactes)
     const isExactYear = hasHadAnniversaryThisYear
       ? (now.getMonth() === startDate.getMonth() && now.getDate() === startDate.getDate())
       : false;
 
     const cardLabel = isExactYear ? String(years) : String(years) + '+';
-    const profilLabel = isExactYear ? String(years) : 'plus de ' + String(years);
+    const prefixByLang = { fr: 'plus de ', en: 'over ', it: 'oltre ' };
+    const profilLabel = isExactYear ? String(years) : (prefixByLang[lang] || 'plus de ') + String(years);
 
     const kpiEl = document.getElementById('kpi-years');
     const profilEl = document.getElementById('profil-years');
     if (kpiEl) kpiEl.textContent = cardLabel;
     if (profilEl) profilEl.textContent = profilLabel;
+  }
+
+  // ============ APPLICATION DE LA LANGUE ============
+  function applyLanguage(lang){
+    const dict = translations[lang] || translations.fr;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key] !== undefined) el.innerHTML = dict[key];
+    });
+    document.documentElement.setAttribute('lang', lang);
+    document.title = dict.page_title;
+    document.getElementById('langBtnLabel').textContent = lang.toUpperCase();
+    document.querySelectorAll('.lang-option').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    });
+    updateExperienceLabels(lang);
+    try { localStorage.setItem('site-lang', lang); } catch(e){}
+  }
+
+  // ============ INITIALISATION ET INTERACTIONS ============
+  (function(){
+    let saved = 'fr';
+    try { saved = localStorage.getItem('site-lang') || 'fr'; } catch(e){}
+    applyLanguage(saved);
+
+    const switcher = document.getElementById('langSwitcher');
+    const btn = document.getElementById('langBtn');
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      switcher.classList.toggle('open');
+    });
+
+    document.querySelectorAll('.lang-option').forEach(opt => {
+      opt.addEventListener('click', (e) => {
+        e.stopPropagation();
+        applyLanguage(opt.getAttribute('data-lang'));
+        switcher.classList.remove('open');
+      });
+    });
+
+    document.addEventListener('click', () => switcher.classList.remove('open'));
   })();
 </script>
 
