@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Myriam Ghoulem — Data Analyst</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -92,9 +93,12 @@
   /* KPI tiles — the signature element */
   .kpi-grid{
     display:grid;
-    grid-template-columns:repeat(4, 1fr);
+    grid-template-columns:repeat(5, 1fr);
     border-top:1px solid rgba(255,255,255,.14);
     border-left:1px solid rgba(255,255,255,.14);
+  }
+  @media (max-width:900px){
+    .kpi-grid{grid-template-columns:repeat(3, 1fr);}
   }
   @media (max-width:760px){
     .kpi-grid{grid-template-columns:repeat(2, 1fr);}
@@ -288,6 +292,16 @@
     display:flex;
     flex-direction:column;
     justify-content:space-between;
+    transition:transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+  }
+  .proj-card:hover{
+    transform:translateY(-4px);
+    border:1px solid var(--teal);
+    box-shadow:0 10px 24px rgba(20,36,51,.08);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .proj-card{transition:none;}
+    .proj-card:hover{transform:none;}
   }
   .proj-status{
     font-family:'IBM Plex Mono', monospace;
@@ -408,7 +422,7 @@
   <div class="wrap hero-inner">
     <div class="eyebrow" data-i18n="eyebrow">Disponible immédiatement — Île-de-France</div>
     <h1 class="name display">Myriam Ghoulem</h1>
-    <div class="role-line" data-i18n="role_line"><strong>Data Analyst</strong> — analyse, structuration &amp; valorisation de données</div>
+    <div class="role-line" data-i18n="role_line"><strong>Data Analyst</strong> — analyse, fiabilisation &amp; valorisation de données</div>
     <div class="location-line mono">Chennevières-sur-Marne (94) · 07 86 81 99 28 · <a href="mailto:dubostmg@gmail.com" style="color:#8695A3;">dubostmg@gmail.com</a> · <a href="https://www.linkedin.com/in/myrg/" target="_blank" rel="noopener" style="color:#8695A3;">linkedin.com/in/myrg</a></div>
   </div>
   <div class="kpi-grid">
@@ -418,9 +432,14 @@
       <div class="kpi-sub" data-i18n="kpi_sub_experience">années en data analyse</div>
     </div>
     <div class="kpi">
-      <div class="kpi-label" data-i18n="kpi_label_tools">Outils maîtrisés</div>
+      <div class="kpi-label" data-i18n="kpi_label_tools">Outils utilisés</div>
       <div class="kpi-value">13</div>
       <div class="kpi-sub">SQL, Power BI, Python…</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label" data-i18n="kpi_label_dashboards">Tableaux de bord</div>
+      <div class="kpi-value">20+</div>
+      <div class="kpi-sub" data-i18n="kpi_sub_dashboards">utilisés par les métiers</div>
     </div>
     <div class="kpi">
       <div class="kpi-label" data-i18n="kpi_label_languages">Langues</div>
@@ -463,8 +482,8 @@
       <div class="exp-company">Groupe Saretec, Créteil</div>
       <div class="gantt-track"><div class="gantt-bar" style="width:100%;"></div></div>
       <ul class="exp-desc">
-        <li data-i18n="exp1_b1">Recueil et analyse des besoins métiers auprès de multiples parties prenantes ; cadrage fonctionnel des demandes.</li>
-        <li data-i18n="exp1_b2">Conception et déploiement de dashboards Power BI pour le pilotage de la performance.</li>
+        <li data-i18n="exp1_b1">Recueil et analyse des besoins métiers auprès de multiples parties prenantes.</li>
+        <li data-i18n="exp1_b2">Conception et déploiement de dashboards Power BI pour le pilotage de la performance. Création de 20+ tableaux de bord Power BI pour le pilotage de la performance.</li>
         <li data-i18n="exp1_b3">Structuration et automatisation des processus de reporting, réduisant les délais de production et fiabilisant les livrables.</li>
         <li data-i18n="exp1_b4">Accompagnement des utilisateurs : formation, support, documentation.</li>
       </ul>
@@ -520,7 +539,7 @@
     <div class="skill-cat" data-i18n="skillcat_techniques">Techniques</div>
     <div class="chips">
       <span class="chip">SQL</span>
-      <span class="chip">Power BI</span>
+      <span class="chip">Power BI (DAX • Power Query • Modélisation • RLS • Octroi des droits • Optimisation)</span>
       <span class="chip">Copilot (Power BI)</span>
       <span class="chip">Microsoft Fabric</span>
       <span class="chip">Tableau</span>
@@ -630,6 +649,17 @@
   </div>
 </section>
 
+<section class="wrap reveal" id="apropos">
+  <div class="section-head">
+    <span class="section-num mono">06</span>
+    <h2 class="section-title" data-i18n="section_apropos">À propos</h2>
+  </div>
+  <div class="profil-text">
+    <p data-i18n="apropos_p1">Au-delà des tableaux de bord, je suis quelqu'un de curieux — la même curiosité qui me pousse à décortiquer un jeu de données me pousse aussi à apprendre de nouveaux accords à la guitare ou à passer une soirée à dessiner. J'aime les sujets où il faut remettre de l'ordre dans la complexité, que ce soit dans une base de données ou dans un morceau de musique à déchiffrer.</p>
+    <p data-i18n="apropos_p2">En ce moment, je continue à apprendre : je termine une certification Python, et je construis peu à peu les premiers projets de ce portfolio. Ce qui me motive au quotidien, c'est de transformer une donnée brute en quelque chose d'utile pour une équipe — et de ne jamais arrêter d'apprendre pour y arriver mieux.</p>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     <div class="foot-title display" data-i18n="foot_title">Discutons de votre besoin en data.</div>
@@ -637,6 +667,7 @@
     <div class="foot-actions">
       <a href="mailto:dubostmg@gmail.com" class="btn btn-primary" data-i18n="foot_btn_email">Écrire un email</a>
       <a href="tel:+33786819928" class="btn btn-ghost">07 86 81 99 28</a>
+      <a href="CV_Myriam_Ghoulem.pdf" download class="btn btn-ghost" data-i18n="foot_btn_cv">Télécharger mon CV</a>
     </div>
     <div class="foot-bottom">
       <span>Myriam Ghoulem — Data Analyst</span>
@@ -658,10 +689,12 @@
   const translations = {
     fr: {
       eyebrow: "Disponible immédiatement — Île-de-France",
-      role_line: "<strong>Data Analyst</strong> — analyse, structuration &amp; valorisation de données",
+      role_line: "<strong>Data Analyst</strong> — analyse, fiabilisation &amp; valorisation de données",
       kpi_label_experience: "Expérience",
       kpi_sub_experience: "années en data analyse",
-      kpi_label_tools: "Outils maîtrisés",
+      kpi_label_tools: "Outils utilisés",
+      kpi_label_dashboards: "Tableaux de bord",
+      kpi_sub_dashboards: "utilisés par les métiers",
       kpi_label_languages: "Langues",
       kpi_sub_languages: "FR natif · EN courant · IT bilingue",
       kpi_label_certification: "Certification",
@@ -676,8 +709,8 @@
       profil_p3: "Une double compétence — analyse de données et pilotage de projet — acquise sur le terrain et complétée par une formation en systèmes d'information et stratégie d'entreprise (Université Clermont Auvergne, HEC Montréal).",
       exp1_title: "Chargée d'études",
       exp1_dates: "SEPT. 2020 → FÉV. 2026 · 5 ans et 5 mois",
-      exp1_b1: "Recueil et analyse des besoins métiers auprès de multiples parties prenantes ; cadrage fonctionnel des demandes.",
-      exp1_b2: "Conception et déploiement de dashboards Power BI pour le pilotage de la performance.",
+      exp1_b1: "Recueil et analyse des besoins métiers auprès de multiples parties prenantes.",
+      exp1_b2: "Conception et déploiement de dashboards Power BI pour le pilotage de la performance. Création de 20+ tableaux de bord Power BI pour le pilotage de la performance.",
       exp1_b3: "Structuration et automatisation des processus de reporting, réduisant les délais de production et fiabilisant les livrables.",
       exp1_b4: "Accompagnement des utilisateurs : formation, support, documentation.",
       exp2_title: "Gestionnaire Master Data",
@@ -720,17 +753,23 @@
       proj3_status: "// à définir",
       proj3_title: "Prochain projet",
       proj3_desc: "Emplacement réservé pour un futur projet portfolio.",
+      section_apropos: "À propos",
+      apropos_p1: "Au-delà des tableaux de bord, je suis quelqu'un de curieux — la même curiosité qui me pousse à décortiquer un jeu de données me pousse aussi à apprendre de nouveaux accords à la guitare ou à passer une soirée à dessiner. J'aime les sujets où il faut remettre de l'ordre dans la complexité, que ce soit dans une base de données ou dans un morceau de musique à déchiffrer.",
+      apropos_p2: "En ce moment, je continue à apprendre : je termine une certification Python, et je construis peu à peu les premiers projets de ce portfolio. Ce qui me motive au quotidien, c'est de transformer une donnée brute en quelque chose d'utile pour une équipe — et de ne jamais arrêter d'apprendre pour y arriver mieux.",
       foot_title: "Discutons de votre besoin en data.",
       foot_sub: "Disponible immédiatement pour un poste de Data Analyst en Île-de-France, en présentiel ou hybride.",
       foot_btn_email: "Écrire un email",
+      foot_btn_cv: "Télécharger mon CV",
       page_title: "Myriam Ghoulem — Data Analyst",
     },
     en: {
       eyebrow: "Available immediately — Paris Region",
-      role_line: "<strong>Data Analyst</strong> — data analysis, structuring &amp; value creation",
+      role_line: "<strong>Data Analyst</strong> — data analysis, reliability &amp; value creation",
       kpi_label_experience: "Experience",
       kpi_sub_experience: "years in data analysis",
-      kpi_label_tools: "Tools mastered",
+      kpi_label_tools: "Tools used",
+      kpi_label_dashboards: "Dashboards",
+      kpi_sub_dashboards: "used by business teams",
       kpi_label_languages: "Languages",
       kpi_sub_languages: "FR native · EN fluent · IT bilingual",
       kpi_label_certification: "Certification",
@@ -745,8 +784,8 @@
       profil_p3: "A dual expertise — data analysis and project management — built on the job and complemented by training in information systems and corporate strategy (Université Clermont Auvergne, HEC Montréal).",
       exp1_title: "Data Analyst",
       exp1_dates: "SEPT. 2020 → FEB. 2026 · 5 years 5 months",
-      exp1_b1: "Gathered and analyzed business needs from multiple stakeholders; defined functional scope for requests.",
-      exp1_b2: "Designed and deployed Power BI dashboards to support performance management.",
+      exp1_b1: "Gathered and analyzed business needs from multiple stakeholders.",
+      exp1_b2: "Designed and deployed Power BI dashboards to support performance management. Created 20+ Power BI dashboards to support performance management.",
       exp1_b3: "Structured and automated reporting processes, reducing production times and improving deliverable reliability.",
       exp1_b4: "Supported end users through training, assistance, and documentation.",
       exp2_title: "Master Data Analyst",
@@ -789,17 +828,23 @@
       proj3_status: "// to be defined",
       proj3_title: "Next project",
       proj3_desc: "Placeholder for a future portfolio project.",
+      section_apropos: "About",
+      apropos_p1: "Beyond dashboards, I'm someone who stays curious — the same curiosity that drives me to dig into a dataset also pushes me to learn a new guitar chord or spend an evening drawing. I'm drawn to problems that need order brought to complexity, whether in a database or in a piece of music to decode.",
+      apropos_p2: "Right now, I'm still learning: finishing a Python certification, and gradually building the first projects for this portfolio. What motivates me day to day is turning raw data into something genuinely useful for a team — and never stopping learning to do it better.",
       foot_title: "Let's talk about your data needs.",
       foot_sub: "Available immediately for a Data Analyst role in the Paris Region, on-site or hybrid.",
       foot_btn_email: "Send an email",
+      foot_btn_cv: "Download my CV",
       page_title: "Myriam Ghoulem — Data Analyst",
     },
     it: {
       eyebrow: "Disponibile da subito — Île-de-France",
-      role_line: "<strong>Data Analyst</strong> — analisi, strutturazione &amp; valorizzazione dei dati",
+      role_line: "<strong>Data Analyst</strong> — analisi, affidabilità &amp; valorizzazione dei dati",
       kpi_label_experience: "Esperienza",
       kpi_sub_experience: "anni nell'analisi dati",
-      kpi_label_tools: "Strumenti padroneggiati",
+      kpi_label_tools: "Strumenti utilizzati",
+      kpi_label_dashboards: "Dashboard",
+      kpi_sub_dashboards: "utilizzati dai team di business",
       kpi_label_languages: "Lingue",
       kpi_sub_languages: "FR madrelingua · EN fluente · IT bilingue",
       kpi_label_certification: "Certificazione",
@@ -814,8 +859,8 @@
       profil_p3: "Una doppia competenza — analisi dei dati e gestione di progetto — acquisita sul campo e completata da una formazione in sistemi informativi e strategia aziendale (Université Clermont Auvergne, HEC Montréal).",
       exp1_title: "Data Analyst",
       exp1_dates: "SET. 2020 → FEB. 2026 · 5 anni e 5 mesi",
-      exp1_b1: "Raccolta e analisi delle esigenze aziendali presso molteplici interlocutori; definizione dell'ambito funzionale delle richieste.",
-      exp1_b2: "Progettazione e implementazione di dashboard Power BI per il monitoraggio delle performance.",
+      exp1_b1: "Raccolta e analisi delle esigenze aziendali presso molteplici interlocutori.",
+      exp1_b2: "Progettazione e implementazione di dashboard Power BI per il monitoraggio delle performance. Creazione di oltre 20 dashboard Power BI per il monitoraggio delle performance.",
       exp1_b3: "Strutturazione e automazione dei processi di reportistica, riducendo i tempi di produzione e migliorando l'affidabilità dei risultati.",
       exp1_b4: "Supporto agli utenti: formazione, assistenza, documentazione.",
       exp2_title: "Master Data Analyst",
@@ -858,9 +903,13 @@
       proj3_status: "// da definire",
       proj3_title: "Prossimo progetto",
       proj3_desc: "Spazio riservato per un futuro progetto portfolio.",
+      section_apropos: "Chi sono",
+      apropos_p1: "Oltre le dashboard, sono una persona curiosa — la stessa curiosità che mi spinge ad analizzare un dataset mi porta anche a imparare un nuovo accordo di chitarra o a passare una serata a disegnare. Mi appassionano i problemi che richiedono di mettere ordine nella complessità, che si tratti di un database o di un brano musicale da decifrare.",
+      apropos_p2: "In questo momento continuo a imparare: sto completando una certificazione Python e sto costruendo poco a poco i primi progetti di questo portfolio. Ciò che mi motiva ogni giorno è trasformare un dato grezzo in qualcosa di davvero utile per un team — e non smettere mai di imparare per farlo sempre meglio.",
       foot_title: "Parliamo delle vostre esigenze in ambito data.",
       foot_sub: "Disponibile da subito per un ruolo di Data Analyst in Île-de-France, in presenza o ibrido.",
       foot_btn_email: "Scrivi un'email",
+      foot_btn_cv: "Scarica il mio CV",
       page_title: "Myriam Ghoulem — Data Analyst",
     }
   };
