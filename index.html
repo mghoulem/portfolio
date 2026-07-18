@@ -84,11 +84,27 @@
     margin-bottom:8px;
   }
   .role-line strong{color:#EDEFEA; font-weight:500;}
-  .location-line{
+  .contact-list{
+    margin-bottom:44px;
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+  }
+  .contact-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'IBM Plex Mono', monospace;
     font-size:14px;
     color:#8695A3;
-    margin-bottom:44px;
   }
+  .contact-item svg{
+    width:15px; height:15px;
+    flex-shrink:0;
+    stroke:#7E8FA0;
+  }
+  .contact-item a{color:#8695A3; text-decoration:none;}
+  .contact-item a:hover{color:#EDEFEA;}
 
   /* KPI tiles — the signature element */
   .kpi-grid{
@@ -423,7 +439,24 @@
     <div class="eyebrow" data-i18n="eyebrow">Disponible immédiatement — Île-de-France</div>
     <h1 class="name display">Myriam Ghoulem</h1>
     <div class="role-line" data-i18n="role_line"><strong>Data Analyst</strong> — analyse, fiabilisation &amp; valorisation de données</div>
-    <div class="location-line mono">Chennevières-sur-Marne (94) · 07 86 81 99 28 · <a href="mailto:dubostmg@gmail.com" style="color:#8695A3;">dubostmg@gmail.com</a> · <a href="https://www.linkedin.com/in/myrg/" target="_blank" rel="noopener" style="color:#8695A3;">linkedin.com/in/myrg</a></div>
+    <div class="contact-list">
+      <div class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+        <span>Chennevières-sur-Marne (94)</span>
+      </div>
+      <div class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18h2"/></svg>
+        <span>07 86 81 99 28</span>
+      </div>
+      <div class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M3 6.5l9 6.5 9-6.5"/></svg>
+        <a href="mailto:dubostmg@gmail.com">dubostmg@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="2.5" width="19" height="19" rx="2.5"/><path d="M7.2 10v7M7.2 7.2v.01M11.2 17v-4.2c0-1.2 1-2.3 2.4-2.3s2.2 1 2.2 2.3V17"/></svg>
+        <a href="https://www.linkedin.com/in/myrg/" target="_blank" rel="noopener">linkedin.com/in/myrg</a>
+      </div>
+    </div>
   </div>
   <div class="kpi-grid">
     <div class="kpi">
