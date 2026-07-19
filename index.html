@@ -396,7 +396,10 @@
     color:#EDEFEA;
     white-space:nowrap;
     margin-right:8px;
+    text-decoration:none;
+    cursor:pointer;
   }
+  .site-nav-brand:hover{color:#C68A2E;}
   .nav-link{
     font-family:'IBM Plex Mono', monospace;
     font-size:12.5px;
@@ -440,10 +443,12 @@
 
 
   .lang-switcher{
-    position:relative;
-    margin-left:auto;
-    flex-shrink:0;
+    position:absolute;
+    top:50%;
+    right:32px;
+    transform:translateY(-50%);
   }
+  @media (max-width:640px){.lang-switcher{right:20px;}}
   .lang-btn{
     display:flex; align-items:center; gap:6px;
     background:rgba(255,255,255,.06);
@@ -496,23 +501,22 @@
 
 <nav class="site-nav">
   <div class="site-nav-inner">
-    <span class="site-nav-brand">MG</span>
+    <a href="#" class="site-nav-brand" id="navBrandTop">MG</a>
     <a href="#profil" class="nav-link" data-i18n="nav_profil">Profil</a>
     <a href="#experience" class="nav-link" data-i18n="nav_experience">Expérience</a>
     <a href="#competences" class="nav-link" data-i18n="nav_competences">Compétences</a>
     <a href="#projets" class="nav-link" data-i18n="nav_projets">Projets</a>
-    <a href="#contact" class="nav-link" data-i18n="nav_contact">Contact</a>
+  </div>
 
-    <div class="lang-switcher" id="langSwitcher">
-      <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
-        <span id="langBtnLabel">FR</span>
-      </button>
-      <div class="lang-menu" id="langMenu">
-        <button class="lang-option active" data-lang="fr">Français</button>
-        <button class="lang-option" data-lang="en">English</button>
-        <button class="lang-option" data-lang="it">Italiano</button>
-      </div>
+  <div class="lang-switcher" id="langSwitcher">
+    <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+      <span id="langBtnLabel">FR</span>
+    </button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option active" data-lang="fr">Français</button>
+      <button class="lang-option" data-lang="en">English</button>
+      <button class="lang-option" data-lang="it">Italiano</button>
     </div>
   </div>
 </nav>
@@ -769,17 +773,6 @@
   </div>
 </section>
 
-<section class="wrap reveal" id="apropos">
-  <div class="section-head">
-    <span class="section-num mono">06</span>
-    <h2 class="section-title" data-i18n="section_apropos">À propos</h2>
-  </div>
-  <div class="profil-text">
-    <p data-i18n="apropos_p1">Au-delà des tableaux de bord, je suis quelqu'un de curieux — la même curiosité qui me pousse à décortiquer un jeu de données me pousse aussi à apprendre de nouveaux accords à la guitare ou à passer une soirée à dessiner. J'aime les sujets où il faut remettre de l'ordre dans la complexité, que ce soit dans une base de données ou dans un morceau de musique à déchiffrer.</p>
-    <p data-i18n="apropos_p2">En ce moment, je continue à apprendre : je termine une certification Python, et je construis peu à peu les premiers projets de ce portfolio. Ce qui me motive au quotidien, c'est de transformer une donnée brute en quelque chose d'utile pour une équipe — et de ne jamais arrêter d'apprendre pour y arriver mieux.</p>
-  </div>
-</section>
-
 <footer id="contact">
   <div class="wrap">
     <div class="foot-title display" data-i18n="foot_title">Discutons de votre besoin en data.</div>
@@ -872,14 +865,10 @@
       proj3_status: "// à définir",
       proj3_title: "Prochain projet",
       proj3_desc: "Emplacement réservé pour un futur projet portfolio.",
-      section_apropos: "À propos",
       nav_profil: "Profil",
       nav_experience: "Expérience",
       nav_competences: "Compétences",
       nav_projets: "Projets",
-      nav_contact: "Contact",
-      apropos_p1: "Au-delà des tableaux de bord, je suis quelqu'un de curieux — la même curiosité qui me pousse à décortiquer un jeu de données me pousse aussi à apprendre de nouveaux accords à la guitare ou à passer une soirée à dessiner. J'aime les sujets où il faut remettre de l'ordre dans la complexité, que ce soit dans une base de données ou dans un morceau de musique à déchiffrer.",
-      apropos_p2: "En ce moment, je continue à apprendre : je termine une certification Python, et je construis peu à peu les premiers projets de ce portfolio. Ce qui me motive au quotidien, c'est de transformer une donnée brute en quelque chose d'utile pour une équipe — et de ne jamais arrêter d'apprendre pour y arriver mieux.",
       foot_title: "Discutons de votre besoin en data.",
       foot_sub: "Disponible immédiatement pour un poste de Data Analyst en Île-de-France, en présentiel ou hybride.",
       foot_btn_email: "Écrire un email",
@@ -951,14 +940,10 @@
       proj3_status: "// to be defined",
       proj3_title: "Next project",
       proj3_desc: "Placeholder for a future portfolio project.",
-      section_apropos: "About",
       nav_profil: "Profile",
       nav_experience: "Experience",
       nav_competences: "Skills",
       nav_projets: "Projects",
-      nav_contact: "Contact",
-      apropos_p1: "Beyond dashboards, I'm someone who stays curious — the same curiosity that drives me to dig into a dataset also pushes me to learn a new guitar chord or spend an evening drawing. I'm drawn to problems that need order brought to complexity, whether in a database or in a piece of music to decode.",
-      apropos_p2: "Right now, I'm still learning: finishing a Python certification, and gradually building the first projects for this portfolio. What motivates me day to day is turning raw data into something genuinely useful for a team — and never stopping learning to do it better.",
       foot_title: "Let's talk about your data needs.",
       foot_sub: "Available immediately for a Data Analyst role in the Paris Region, on-site or hybrid.",
       foot_btn_email: "Send an email",
@@ -1030,14 +1015,10 @@
       proj3_status: "// da definire",
       proj3_title: "Prossimo progetto",
       proj3_desc: "Spazio riservato per un futuro progetto portfolio.",
-      section_apropos: "Chi sono",
       nav_profil: "Profilo",
       nav_experience: "Esperienza",
       nav_competences: "Competenze",
       nav_projets: "Progetti",
-      nav_contact: "Contatti",
-      apropos_p1: "Oltre le dashboard, sono una persona curiosa — la stessa curiosità che mi spinge ad analizzare un dataset mi porta anche a imparare un nuovo accordo di chitarra o a passare una serata a disegnare. Mi appassionano i problemi che richiedono di mettere ordine nella complessità, che si tratti di un database o di un brano musicale da decifrare.",
-      apropos_p2: "In questo momento continuo a imparare: sto completando una certificazione Python e sto costruendo poco a poco i primi progetti di questo portfolio. Ciò che mi motiva ogni giorno è trasformare un dato grezzo in qualcosa di davvero utile per un team — e non smettere mai di imparare per farlo sempre meglio.",
       foot_title: "Parliamo delle vostre esigenze in ambito data.",
       foot_sub: "Disponibile da subito per un ruolo di Data Analyst in Île-de-France, in presenza o ibrido.",
       foot_btn_email: "Scrivi un'email",
@@ -1118,6 +1099,11 @@
     const navLinks = document.querySelectorAll('.nav-link');
     const navHeight = 52;
 
+    document.getElementById('navBrandTop').addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
     navLinks.forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -1129,7 +1115,7 @@
       });
     });
 
-    const sections = ['profil','experience','competences','projets','contact']
+    const sections = ['profil','experience','competences','projets']
       .map(id => document.getElementById(id))
       .filter(Boolean);
 
@@ -1152,13 +1138,6 @@
     const btn = document.getElementById('backToTop');
     window.addEventListener('scroll', () => {
       btn.classList.toggle('visible', window.pageYOffset > 500);
-      // Force "Contact" actif quand on est tout en bas de page (section trop courte pour l'IntersectionObserver)
-      const atBottom = (window.innerHeight + window.scrollY) >= (document.body.scrollHeight - 4);
-      if (atBottom) {
-        document.querySelectorAll('.nav-link').forEach(link => {
-          link.classList.toggle('active', link.getAttribute('href') === '#contact');
-        });
-      }
     });
     btn.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
