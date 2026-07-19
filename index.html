@@ -365,7 +365,79 @@
     color:#7E8FA0;
   }
 
-  /* ---------- LANGUAGE SWITCHER ---------- */
+  /* ---------- STICKY NAV ---------- */
+  .site-nav{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:100;
+    background:rgba(20,36,51,.92);
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+    border-bottom:1px solid rgba(255,255,255,.1);
+    height:52px;
+  }
+  .site-nav-inner{
+    max-width:1040px;
+    margin:0 auto;
+    height:100%;
+    padding:0 32px;
+    display:flex;
+    align-items:center;
+    gap:28px;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  .site-nav-inner::-webkit-scrollbar{display:none;}
+  .site-nav-brand{
+    font-family:'Fraunces', serif;
+    font-size:15px;
+    font-weight:600;
+    color:#EDEFEA;
+    white-space:nowrap;
+    margin-right:8px;
+  }
+  .nav-link{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:.03em;
+    color:#9AA7B3;
+    text-decoration:none;
+    white-space:nowrap;
+    padding:6px 0;
+    border-bottom:2px solid transparent;
+    transition:color .18s ease, border-color .18s ease;
+  }
+  .nav-link:hover{color:#EDEFEA;}
+  .nav-link.active{color:#C68A2E; border-bottom-color:#C68A2E;}
+  body{padding-top:52px;}
+
+  /* ---------- BACK TO TOP ---------- */
+  .back-to-top{
+    position:fixed;
+    right:24px;
+    bottom:24px;
+    z-index:100;
+    width:42px; height:42px;
+    border-radius:50%;
+    background:#142433;
+    border:1px solid rgba(255,255,255,.18);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(8px);
+    transition:opacity .25s ease, transform .25s ease, visibility .25s;
+  }
+  .back-to-top.visible{
+    opacity:1; visibility:visible; transform:translateY(0);
+  }
+  .back-to-top:hover{background:#1c3348;}
+  .back-to-top svg{width:18px; height:18px; stroke:#C68A2E;}
+  @media (prefers-reduced-motion: reduce){
+    .back-to-top{transition:opacity .01s linear;}
+  }
+
+
   .lang-switcher{
     position:absolute;
     top:28px;
@@ -422,6 +494,21 @@
 </style>
 </head>
 <body>
+
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <span class="site-nav-brand">MG</span>
+    <a href="#profil" class="nav-link" data-i18n="nav_profil">Profil</a>
+    <a href="#experience" class="nav-link" data-i18n="nav_experience">Expérience</a>
+    <a href="#competences" class="nav-link" data-i18n="nav_competences">Compétences</a>
+    <a href="#projets" class="nav-link" data-i18n="nav_projets">Projets</a>
+    <a href="#contact" class="nav-link" data-i18n="nav_contact">Contact</a>
+  </div>
+</nav>
+
+<button class="back-to-top" id="backToTop" aria-label="Retour en haut">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
 
 <div class="hero">
   <div class="lang-switcher" id="langSwitcher">
@@ -693,7 +780,7 @@
   </div>
 </section>
 
-<footer>
+<footer id="contact">
   <div class="wrap">
     <div class="foot-title display" data-i18n="foot_title">Discutons de votre besoin en data.</div>
     <div class="foot-sub" data-i18n="foot_sub">Disponible immédiatement pour un poste de Data Analyst en Île-de-France, en présentiel ou hybride.</div>
@@ -786,6 +873,11 @@
       proj3_title: "Prochain projet",
       proj3_desc: "Emplacement réservé pour un futur projet portfolio.",
       section_apropos: "À propos",
+      nav_profil: "Profil",
+      nav_experience: "Expérience",
+      nav_competences: "Compétences",
+      nav_projets: "Projets",
+      nav_contact: "Contact",
       apropos_p1: "Au-delà des tableaux de bord, je suis quelqu'un de curieux — la même curiosité qui me pousse à décortiquer un jeu de données me pousse aussi à apprendre de nouveaux accords à la guitare ou à passer une soirée à dessiner. J'aime les sujets où il faut remettre de l'ordre dans la complexité, que ce soit dans une base de données ou dans un morceau de musique à déchiffrer.",
       apropos_p2: "En ce moment, je continue à apprendre : je termine une certification Python, et je construis peu à peu les premiers projets de ce portfolio. Ce qui me motive au quotidien, c'est de transformer une donnée brute en quelque chose d'utile pour une équipe — et de ne jamais arrêter d'apprendre pour y arriver mieux.",
       foot_title: "Discutons de votre besoin en data.",
@@ -860,6 +952,11 @@
       proj3_title: "Next project",
       proj3_desc: "Placeholder for a future portfolio project.",
       section_apropos: "About",
+      nav_profil: "Profile",
+      nav_experience: "Experience",
+      nav_competences: "Skills",
+      nav_projets: "Projects",
+      nav_contact: "Contact",
       apropos_p1: "Beyond dashboards, I'm someone who stays curious — the same curiosity that drives me to dig into a dataset also pushes me to learn a new guitar chord or spend an evening drawing. I'm drawn to problems that need order brought to complexity, whether in a database or in a piece of music to decode.",
       apropos_p2: "Right now, I'm still learning: finishing a Python certification, and gradually building the first projects for this portfolio. What motivates me day to day is turning raw data into something genuinely useful for a team — and never stopping learning to do it better.",
       foot_title: "Let's talk about your data needs.",
@@ -934,6 +1031,11 @@
       proj3_title: "Prossimo progetto",
       proj3_desc: "Spazio riservato per un futuro progetto portfolio.",
       section_apropos: "Chi sono",
+      nav_profil: "Profilo",
+      nav_experience: "Esperienza",
+      nav_competences: "Competenze",
+      nav_projets: "Progetti",
+      nav_contact: "Contatti",
       apropos_p1: "Oltre le dashboard, sono una persona curiosa — la stessa curiosità che mi spinge ad analizzare un dataset mi porta anche a imparare un nuovo accordo di chitarra o a passare una serata a disegnare. Mi appassionano i problemi che richiedono di mettere ordine nella complessità, che si tratti di un database o di un brano musicale da decifrare.",
       apropos_p2: "In questo momento continuo a imparare: sto completando una certificazione Python e sto costruendo poco a poco i primi progetti di questo portfolio. Ciò che mi motiva ogni giorno è trasformare un dato grezzo in qualcosa di davvero utile per un team — e non smettere mai di imparare per farlo sempre meglio.",
       foot_title: "Parliamo delle vostre esigenze in ambito data.",
@@ -1009,6 +1111,58 @@
     });
 
     document.addEventListener('click', () => switcher.classList.remove('open'));
+  })();
+
+  // ============ NAVIGATION : DÉFILEMENT FLUIDE + SECTION ACTIVE ============
+  (function(){
+    const navLinks = document.querySelectorAll('.nav-link');
+    const navHeight = 52;
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          const top = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+
+    const sections = ['profil','experience','competences','projets','contact']
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { rootMargin: `-${navHeight + 10}px 0px -70% 0px`, threshold: 0 });
+
+    sections.forEach(sec => navObserver.observe(sec));
+  })();
+
+  // ============ BOUTON RETOUR EN HAUT ============
+  (function(){
+    const btn = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      btn.classList.toggle('visible', window.pageYOffset > 500);
+      // Force "Contact" actif quand on est tout en bas de page (section trop courte pour l'IntersectionObserver)
+      const atBottom = (window.innerHeight + window.scrollY) >= (document.body.scrollHeight - 4);
+      if (atBottom) {
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#contact');
+        });
+      }
+    });
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   })();
 </script>
 
