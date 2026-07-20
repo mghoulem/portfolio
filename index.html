@@ -110,7 +110,7 @@
   /* KPI tiles — the signature element */
   .kpi-grid{
     display:grid;
-    grid-template-columns:repeat(5, 1fr);
+    grid-template-columns:repeat(6, 1fr);
     border-top:1px solid rgba(255,255,255,.14);
     border-left:1px solid rgba(255,255,255,.14);
   }
@@ -439,6 +439,18 @@
   }
   .nav-link:hover{color:#EDEFEA;}
   .nav-link.active{color:#C68A2E; border-bottom-color:#C68A2E;}
+  .nav-link + .nav-link{position:relative;}
+  .nav-link + .nav-link::before{
+    content:"|";
+    position:absolute;
+    left:-16px;
+    color:#4E5B68;
+    pointer-events:none;
+  }
+  @media (max-width:640px){.nav-link + .nav-link::before{left:-9px;}}
+  @media (max-width:430px){.nav-link + .nav-link::before{left:-7px;}}
+  @media (max-width:375px){.nav-link + .nav-link::before{left:-5px;}}
+  @media (max-width:345px){.nav-link + .nav-link::before{left:-3px;}}
   body{padding-top:52px;}
 
   /* ---------- BACK TO TOP ---------- */
@@ -586,6 +598,11 @@
       <div class="kpi-sub" data-i18n="kpi_sub_experience">années en data analyse</div>
     </div>
     <div class="kpi">
+      <div class="kpi-label" data-i18n="kpi_label_impact">Impact métier</div>
+      <div class="kpi-value">3</div>
+      <div class="kpi-sub" data-i18n="kpi_sub_impact">secteurs accompagnés · retail · assurance · automobile</div>
+    </div>
+    <div class="kpi">
       <div class="kpi-label" data-i18n="kpi_label_tools">Outils utilisés</div>
       <div class="kpi-value">13</div>
       <div class="kpi-sub">SQL, Power BI, Python…</div>
@@ -602,7 +619,7 @@
     </div>
     <div class="kpi">
       <div class="kpi-label" data-i18n="kpi_label_certification">Certification</div>
-      <div class="kpi-value mono" style="font-size:19px; padding-top:6px;">TOSA Python</div>
+      <div class="kpi-value mono" style="font-size:19px; line-height:34px;">TOSA Python</div>
       <div class="kpi-sub" data-i18n="kpi_sub_certification">en cours</div>
     </div>
   </div>
@@ -833,6 +850,8 @@
       eyebrow: "Disponible immédiatement — Île-de-France",
       role_line: "<strong>Data Analyst</strong> — analyse, fiabilisation &amp; valorisation de données",
       kpi_label_experience: "Expérience",
+      kpi_label_impact: "Impact métier",
+      kpi_sub_impact: "secteurs accompagnés · retail · assurance · automobile",
       kpi_sub_experience: "années en data analyse",
       kpi_label_tools: "Outils utilisés",
       kpi_label_dashboards: "Tableaux de bord",
@@ -911,6 +930,8 @@
       eyebrow: "Available immediately — Paris Region",
       role_line: "<strong>Data Analyst</strong> — data analysis, reliability &amp; value creation",
       kpi_label_experience: "Experience",
+      kpi_label_impact: "Business impact",
+      kpi_sub_impact: "sectors served · retail · insurance · automotive",
       kpi_sub_experience: "years in data analysis",
       kpi_label_tools: "Tools used",
       kpi_label_dashboards: "Dashboards",
@@ -989,6 +1010,8 @@
       eyebrow: "Disponibile da subito — Île-de-France",
       role_line: "<strong>Data Analyst</strong> — analisi, affidabilità &amp; valorizzazione dei dati",
       kpi_label_experience: "Esperienza",
+      kpi_label_impact: "Impatto professionale",
+      kpi_sub_impact: "settori seguiti · retail · assicurazioni · automotive",
       kpi_sub_experience: "anni nell'analisi dati",
       kpi_label_tools: "Strumenti utilizzati",
       kpi_label_dashboards: "Dashboard",
@@ -1181,13 +1204,7 @@
       });
     }
 
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => { updateActiveSection(); ticking = false; });
-        ticking = true;
-      }
-    });
+    window.addEventListener('scroll', updateActiveSection, { passive: true });
     updateActiveSection();
   })();
 
