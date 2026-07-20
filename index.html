@@ -1167,21 +1167,28 @@
       .map(id => document.getElementById(id))
       .filter(Boolean);
 
-    const intersecting = new Set();
-
-    const navObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const id = entry.target.getAttribute('id');
-        if (entry.isIntersecting) intersecting.add(id);
-        else intersecting.delete(id);
+    function updateActiveSection(){
+      const threshold = navHeight + 8; // juste sous la barre de navigation
+      let current = null;
+      sections.forEach(sec => {
+        if (sec.getBoundingClientRect().top <= threshold) {
+          current = sec; // la dernière section dont le haut a franchi la barre = celle active
+        }
       });
       navLinks.forEach(link => {
         const linkId = link.getAttribute('href').slice(1);
-        link.classList.toggle('active', intersecting.has(linkId));
+        link.classList.toggle('active', current && current.id === linkId);
       });
-    }, { rootMargin: `-${navHeight + 10}px 0px -70% 0px`, threshold: 0 });
+    }
 
-    sections.forEach(sec => navObserver.observe(sec));
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => { updateActiveSection(); ticking = false; });
+        ticking = true;
+      }
+    });
+    updateActiveSection();
   })();
 
   // ============ BOUTON RETOUR EN HAUT ============
