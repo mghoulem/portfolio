@@ -534,6 +534,7 @@
     <a href="#profil" class="nav-link" data-i18n="nav_profil">Profil</a>
     <a href="#experience" class="nav-link" data-i18n="nav_experience">Expérience</a>
     <a href="#competences" class="nav-link" data-i18n="nav_competences">Compétences</a>
+    <a href="#formation" class="nav-link" data-i18n="nav_formation">Formation</a>
     <a href="#projets" class="nav-link" data-i18n="nav_projets">Projets</a>
   </div>
 
@@ -899,6 +900,7 @@
       nav_profil: "Profil",
       nav_experience: "Expérience",
       nav_competences: "Compétences",
+      nav_formation: "Formation",
       nav_projets: "Projets",
       foot_title: "Discutons de votre besoin en data.",
       foot_sub: "Disponible immédiatement pour un poste de Data Analyst en Île-de-France, en présentiel ou hybride.",
@@ -976,6 +978,7 @@
       nav_profil: "Profile",
       nav_experience: "Experience",
       nav_competences: "Skills",
+      nav_formation: "Education",
       nav_projets: "Projects",
       foot_title: "Let's talk about your data needs.",
       foot_sub: "Available immediately for a Data Analyst role in the Paris Region, on-site or hybrid.",
@@ -1053,6 +1056,7 @@
       nav_profil: "Profilo",
       nav_experience: "Esperienza",
       nav_competences: "Competenze",
+      nav_formation: "Formazione",
       nav_projets: "Progetti",
       foot_title: "Parliamo delle vostre esigenze in ambito data.",
       foot_sub: "Disponibile da subito per un ruolo di Data Analyst in Île-de-France, in presenza o ibrido.",
@@ -1159,18 +1163,21 @@
       });
     });
 
-    const sections = ['profil','experience','competences','projets']
+    const sections = ['profil','experience','competences','formation','projets']
       .map(id => document.getElementById(id))
       .filter(Boolean);
 
+    const intersecting = new Set();
+
     const navObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.getAttribute('id');
-          navLinks.forEach(link => {
-            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
-          });
-        }
+        const id = entry.target.getAttribute('id');
+        if (entry.isIntersecting) intersecting.add(id);
+        else intersecting.delete(id);
+      });
+      navLinks.forEach(link => {
+        const linkId = link.getAttribute('href').slice(1);
+        link.classList.toggle('active', intersecting.has(linkId));
       });
     }, { rootMargin: `-${navHeight + 10}px 0px -70% 0px`, threshold: 0 });
 
