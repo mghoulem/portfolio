@@ -178,7 +178,6 @@
     font-size:17px;
     color:#333B42;
     margin-bottom:16px;
-    text-align:justify;
   }
   .card{
     background:var(--card);
@@ -236,7 +235,6 @@
     padding-left:18px;
     position:relative;
     margin-bottom:8px;
-    text-align:justify;
   }
   .exp-desc li::before{
     content:"—";
@@ -330,7 +328,7 @@
     color:var(--muted);
   }
   .proj-title{font-size:16px; font-weight:600; margin:10px 0 8px;}
-  .proj-desc{font-size:13.5px; color:var(--muted); text-align:justify;}
+  .proj-desc{font-size:13.5px; color:var(--muted);}
 
   /* ---------- CONTACT / FOOTER ---------- */
   footer{
@@ -459,7 +457,7 @@
   /* ---------- BACK TO TOP ---------- */
   .back-to-top{
     position:fixed;
-    right:24px;
+    right:max(24px, calc((100vw - 1040px) / 2 + 24px));
     bottom:24px;
     z-index:100;
     width:42px; height:42px;
