@@ -1199,6 +1199,13 @@
           current = sec; // la dernière section dont le haut a franchi la barre = celle active
         }
       });
+      // Cas limite : si on est tout en bas de la page mais que la dernière section
+      // n'a pas pu remonter jusqu'au seuil (pas assez de contenu en dessous pour défiler),
+      // on l'active quand même.
+      const atBottom = (window.scrollY + window.innerHeight) >= (document.body.scrollHeight - 2);
+      if (atBottom && sections.length) {
+        current = sections[sections.length - 1];
+      }
       navLinks.forEach(link => {
         const linkId = link.getAttribute('href').slice(1);
         link.classList.toggle('active', current && current.id === linkId);
