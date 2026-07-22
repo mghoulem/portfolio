@@ -1192,7 +1192,7 @@
       .filter(Boolean);
 
     function updateActiveSection(){
-      const threshold = navHeight + 8; // juste sous la barre de navigation
+      const threshold = navHeight + Math.max(140, window.innerHeight * 0.35); // s'adapte à la hauteur de l'écran
       let current = null;
       sections.forEach(sec => {
         if (sec.getBoundingClientRect().top <= threshold) {
