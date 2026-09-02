@@ -205,8 +205,15 @@
   .contact-row a:hover{color:var(--teal);}
 
   /* ---------- EXPERIENCE (timeline / gantt) ---------- */
-  .exp-item{margin-bottom:40px;}
-  .exp-item:last-child{margin-bottom:0;}
+  .exp-item{
+    margin-bottom:0;
+    height: auto;
+    min-height: 0;
+    overflow: visible;    
+  }
+  .exp-item:last-child{
+    margin-bottom:0;   
+  }
   .exp-top{
     display:flex;
     justify-content:space-between;
