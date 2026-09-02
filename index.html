@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{
+  :root{
     --ink:#142433;
     --ink-2:#1c3348;
     --paper:#F5F6F3;
@@ -205,16 +205,8 @@
   .contact-row a:hover{color:var(--teal);}
 
   /* ---------- EXPERIENCE (timeline / gantt) ---------- */
-  .exp-item{
-    margin-bottom:40px;
-    height:auto;
-    min-height:0;
-    overflow:visible;
-  }
-
-  .exp-item:last-child{
-    margin-bottom:0;
-  }
+  .exp-item{margin-bottom:40px;}
+  .exp-item:last-child{margin-bottom:0;}
   .exp-top{
     display:flex;
     justify-content:space-between;
@@ -226,8 +218,6 @@
   .exp-title{font-size:19px; font-weight:600;}
   .exp-dates{font-size:12.5px; color:var(--muted);}
   .exp-company{font-size:14.5px; color:var(--teal); margin-bottom:14px; font-weight:500;}
-
-  /* lignes oranges = jauges expérience */
   .gantt-track{
     height:8px;
     background:var(--paper-dim);
@@ -239,19 +229,20 @@
     height:100%;
     background:var(--gold);
   }
-
-  /* liste des tâches */
   .exp-desc {
     list-style: disc;
     padding-left: 14px; /* espace avant les bullets des tâches */
   }
-
   .exp-desc li{
     font-size:15px;
     color:#3D454C;
     padding-left:3px; /* espace entre les bullets et la description des tâches */
     position:relative;
     margin-bottom:8px; /* espace entre les différentes bullets */
+  }
+  .exp-desc li::before{
+    position:absolute; left:0;
+    color:var(--muted);
   }
 
   /* ---------- COMPETENCES ---------- */
@@ -631,7 +622,7 @@
       <div class="kpi-sub" data-i18n="kpi_sub_languages">langues professionnelles</div>
     </div>
     <div class="kpi">
-      <div class="kpi-label" data-i18n="kpi_label_certification">Chaîne valeur Data</div>
+      <div class="kpi-label" data-i18n="kpi_label_certification">Chaîne de valeur</div>
       <div class="kpi-value mono" style="font-size:19px; line-height:34px;">End-to-end</div>
       <div class="kpi-sub" data-i18n="kpi_sub_certification">du besoin métier au dashboard</div>
     </div>
@@ -671,9 +662,8 @@
         <li data-i18n="exp1_b3">Automatisation des processus de reporting : réduction des délais de production et fiabilisation des livrables</li>
         <li data-i18n="exp1_b4">Mise en place de règles de gestion, documentation et dictionnaires de données</li>
         <li data-i18n="exp1_b5">Rédaction de documentation fonctionnelle : dictionnaires de données, règles de gestion, processus</li>
-        <li data-i18n="exp1_b6">Amélioration continue de la qualité des données : détection d'anomalies, correction et normalisation
+        <li data-i18n="exp1_b6">Amélioration continue de la qualité des données : détection d'anomalies, correction et normalisation</li>
         <li data-i18n="exp1_b7">Formation et accompagnement des utilisateurs : ateliers, support et guides</li>
-</li>
       </ul>
     </div>
 
@@ -685,9 +675,11 @@
       <div class="exp-company">Continental, Le Meux</div>
       <div class="gantt-track"><div class="gantt-bar" style="width:18%;"></div></div>
       <ul class="exp-desc">
+
         <li data-i18n="exp2_b1">Analyse de données et production de reporting pour différents services métiers</li>
         <li data-i18n="exp2_b2">Exploitation et interrogation de bases de données via SQL</li>
         <li data-i18n="exp2_b3">Participation à la compréhension des besoins métiers et à leur traduction analytique</li>
+
       </ul>
     </div>
 
@@ -699,9 +691,11 @@
       <div class="exp-company">Groupement des Mousquetaires, Bondoufle</div>
       <div class="gantt-track"><div class="gantt-bar" style="width:18%;"></div></div>
       <ul class="exp-desc">
+
         <li data-i18n="exp3_b1">Réalisation d'analyses ad hoc et de classements de points de vente pour fournir des éléments d'aide à la décision</li>
         <li data-i18n="exp3_b2">Contribution à l'élaboration d'un score d'appétence au e-commerce : échantillonnage, validation, transformation des variables et préparation d'une régression logistique</li>
-        <li data-i18n="exp3_b2">Conception et actualisation de reporting de pilotage : ventes, performance produits, magasins et e-commerce, segmentations clients (RFM, RCU, e-commerce)</li>
+        <li data-i18n="exp3_b3">Conception et actualisation de reporting de pilotage : ventes, performance produits, magasins et e-commerce, segmentations clients (RFM, RCU, e-commerce)</li>
+
       </ul>
     </div>
   </div>
@@ -902,12 +896,12 @@
       section_competences: "Compétences",
       section_formation: "Formation",
       section_projets: "Projets",
-      profil_p1: "Data Analyst avec <span id=\"profil-years\">7+</span> ans d'expérience dans l'analyse, la structuration, fiabilisation et la valorisation de données. Spécialisée dans la datavisualisation, l'amélioration continue et la qualité des données.",
+      profil_p1: "Data Analyst avec <span id=\"profil-years\">7+</span> ans d'expérience dans l'analyse, la structuration et la valorisation de données. Spécialisée dans la datavisualisation, l'amélioration continue et la qualité des données.",
       profil_p2: "Habituée à collaborer avec des équipes pluridisciplinaires, je traduis les besoins en solutions concrètes : reporting automatisé, indicateurs de pilotage, optimisation de processus, accompagnement des utilisateurs.",
       profil_p3: "Une double compétence — analyse de données et pilotage de projet — acquise sur le terrain et complétée par une formation en systèmes d'information et stratégie d'entreprise (Université Clermont Auvergne, HEC Montréal).",
-      
       exp1_title: "Chargée d'études",
       exp1_dates: "SEPT. 2020 → FÉV. 2026 · 5 ans et 5 mois",
+
       exp1_b1: "Recueil, analyse et cadrage des besoins auprès des directions métier",
       exp1_b2: "Conception, déploiement et maintenance de dashboards Power BI pour le pilotage opérationnel et stratégique",
       exp1_b3: "Automatisation des processus de reporting : réduction des délais de production et fiabilisation des livrables",
@@ -915,19 +909,20 @@
       exp1_b5: "Rédaction de documentation fonctionnelle : dictionnaires de données, règles de gestion, processus",
       exp1_b6: "Amélioration continue de la qualité des données : détection d'anomalies, correction et normalisation",
       exp1_b7: "Formation et accompagnement des utilisateurs : ateliers, support et guides",
-      
+
       exp2_title: "Gestionnaire Master Data",
       exp2_dates: "FÉV. 2019 → JAN. 2020 · 11 mois",
+
       exp2_b1: "Analyse de données et production de reporting pour différents services métiers",
       exp2_b2: "Exploitation et interrogation de bases de données via SQL",
       exp2_b3: "Participation à la compréhension des besoins métiers et à leur traduction analytique",
 
       exp3_title: "Data Miner",
       exp3_dates: "MARS 2018 → FÉV. 2019 · 11 mois",
+
       exp3_b1: "Réalisation d'analyses ad hoc et de classements de points de vente pour fournir des éléments d'aide à la décision",
       exp3_b2: "Contribution à l'élaboration d'un score d'appétence au e-commerce : échantillonnage, validation, transformation des variables et préparation d'une régression logistique",
-      exp3_b3: "Conception et actualisation de reporting de pilotage : ventes, performance produits, magasins et e-commerce, 
-segmentations clients (RFM, RCU, e-commerce)",
+      exp3_b3: "Conception et actualisation de reporting de pilotage : ventes, performance produits, magasins et e-commerce, segmentations clients (RFM, RCU, e-commerce)",
 
       skillcat_soft: "Soft skills",
       skillcat_langues: "Langues",
@@ -1005,20 +1000,31 @@ segmentations clients (RFM, RCU, e-commerce)",
       profil_p1: "Data Analyst with <span id=\"profil-years\">7+</span> years of experience in data analysis, structuring, and value creation. Specialized in data visualization, continuous improvement, and data quality.",
       profil_p2: "Used to working with cross-functional teams, I translate business needs into concrete solutions: automated reporting, performance indicators, process optimization, user support.",
       profil_p3: "A dual expertise — data analysis and project management — built on the job and complemented by training in information systems and corporate strategy (Université Clermont Auvergne, HEC Montréal).",
-      exp1_title: "Chargée d'études",
+      exp1_title: "Data Analyst",
       exp1_dates: "SEPT. 2020 → FEB. 2026 · 5 years 5 months",
-      exp1_b1: "Gathered and analyzed business needs from multiple stakeholders.",
-      exp1_b2: "Designed and deployed Power BI dashboards to support performance management. Created 20+ Power BI dashboards to support performance management.",
-      exp1_b3: "Structured and automated reporting processes, reducing production times and improving deliverable reliability.",
-      exp1_b4: "Supported end users through training, assistance, and documentation.",
-      exp2_title: "Gestionnaire Master Data",
+
+      exp1_b1: "Gathering, analysing and defining business requirements with business units",
+      exp1_b2: "Design, deployment and maintenance of Power BI dashboards for operational and strategic performance management",
+      exp1_b3: "Automation of reporting processes: reducing production lead times and improving deliverable reliability",
+      exp1_b4: "Implementation of business rules, documentation and data dictionaries",
+      exp1_b5: "Preparation of functional documentation: data dictionaries, business rules and processes",
+      exp1_b6: "Continuous improvement of data quality: anomaly detection, correction and standardisation",
+      exp1_b7: "User training and support: workshops, assistance and user guides",
+
+      exp2_title: "Master Data Analyst",
       exp2_dates: "FEB. 2019 → JAN. 2020 · 11 months",
-      exp2_b1: "Analyzed data and produced reports for various business departments.",
-      exp2_b2: "Queried and maintained databases using SQL.",
+
+      exp2_b1: "Data analysis and reporting for various business departments",
+      exp2_b2: "Querying and extracting data from databases using SQL",
+      exp2_b3: "Contributing to the understanding of business requirements and their translation into analytical solutions",
+
       exp3_title: "Data Miner",
       exp3_dates: "MAR. 2018 → FEB. 2019 · 11 months",
-      exp3_b1: "Managed and improved existing reports; analyzed customer and product data.",
-      exp3_b2: "Answered business questions through SQL queries.",
+
+      exp3_b1: "Conducting ad hoc analyses and store rankings to provide decision-making insights",
+      exp3_b2: "Contributing to the development of an e-commerce propensity score: sampling, validation, variable transformation and preparation of a logistic regression model",
+      exp3_b3: "Designing and updating management reporting: sales, product performance, store and e-commerce performance, customer segmentation (RFM, RCU, e-commerce)",
+
       skillcat_soft: "Soft skills",
       skillcat_langues: "Languages",
       chip_besoins: "Business needs gathering",
@@ -1095,20 +1101,31 @@ segmentations clients (RFM, RCU, e-commerce)",
       profil_p1: "Data Analyst con <span id=\"profil-years\">7+</span> anni di esperienza nell'analisi, strutturazione e valorizzazione dei dati. Specializzata in data visualization, miglioramento continuo e qualità dei dati.",
       profil_p2: "Abituata a collaborare con team multidisciplinari, traduco le esigenze in soluzioni concrete: reportistica automatizzata, indicatori di performance, ottimizzazione dei processi, supporto agli utenti.",
       profil_p3: "Una doppia competenza — analisi dei dati e gestione di progetto — acquisita sul campo e completata da una formazione in sistemi informativi e strategia aziendale (Université Clermont Auvergne, HEC Montréal).",
-      exp1_title: "Chargée d'études",
+      exp1_title: "Data Analyst",
       exp1_dates: "SET. 2020 → FEB. 2026 · 5 anni e 5 mesi",
-      exp1_b1: "Raccolta e analisi delle esigenze aziendali presso molteplici interlocutori.",
-      exp1_b2: "Progettazione e implementazione di dashboard Power BI per il monitoraggio delle performance. Creazione di oltre 20 dashboard Power BI per il monitoraggio delle performance.",
-      exp1_b3: "Strutturazione e automazione dei processi di reportistica, riducendo i tempi di produzione e migliorando l'affidabilità dei risultati.",
-      exp1_b4: "Supporto agli utenti: formazione, assistenza, documentazione.",
-      exp2_title: "Gestionnaire Master Data",
+
+      exp1_b1: "Raccolta, analisi e definizione dei requisiti con le direzioni aziendali",
+      exp1_b2: "Progettazione, implementazione e manutenzione di dashboard Power BI per il monitoraggio operativo e strategico delle performance",
+      exp1_b3: "Automazione dei processi di reporting: riduzione dei tempi di produzione e miglioramento dell'affidabilità dei deliverable",
+      exp1_b4: "Implementazione di regole di gestione, documentazione e dizionari dei dati",
+      exp1_b5: "Redazione della documentazione funzionale: dizionari dei dati, regole di gestione e processi",
+      exp1_b6: "Miglioramento continuo della qualità dei dati: rilevamento delle anomalie, correzione e normalizzazione",
+      exp1_b7: "Formazione e supporto agli utenti: workshop, assistenza e guide operative",
+
+      exp2_title: "Master Data Analyst",
       exp2_dates: "FEB. 2019 → GEN. 2020 · 11 mesi",
-      exp2_b1: "Analisi dei dati e produzione di report per diversi reparti aziendali.",
-      exp2_b2: "Interrogazione e gestione di database tramite SQL.",
+
+      exp2_b1: "Analisi dei dati e produzione di report per diverse funzioni aziendali",
+      exp2_b2: "Interrogazione ed estrazione di dati dai database tramite SQL",
+      exp2_b3: "Contributo alla comprensione delle esigenze aziendali e alla loro traduzione in soluzioni analitiche",
+
       exp3_title: "Data Miner",
       exp3_dates: "MAR. 2018 → FEB. 2019 · 11 mesi",
-      exp3_b1: "Gestione ed evoluzione di report esistenti; analisi dei dati clienti e prodotti.",
-      exp3_b2: "Risposta a quesiti aziendali tramite query SQL.",
+
+      exp3_b1: "Realizzazione di analisi ad hoc e classifiche dei punti vendita per supportare il processo decisionale",
+      exp3_b2: "Contributo allo sviluppo di un propensity score per l'e-commerce: campionamento, validazione, trasformazione delle variabili e preparazione di un modello di regressione logistica",
+      exp3_b3: "Progettazione e aggiornamento della reportistica gestionale: vendite, performance dei prodotti, punti vendita ed e-commerce, segmentazione della clientela (RFM, RCU, e-commerce)",
+
       skillcat_soft: "Soft skills",
       skillcat_langues: "Lingue",
       chip_besoins: "Raccolta delle esigenze aziendali",
@@ -1165,41 +1182,6 @@ segmentations clients (RFM, RCU, e-commerce)",
     }
   };
 
-  // ============ CALCUL DYNAMIQUE DE L'EXPÉRIENCE ============
-  // Règle : point de départ = premier poste (mars 2018) moins les 6 premiers mois
-  // (stage chez Groupement des Mousquetaires, non comptabilisé comme expérience pro)
-  // Carte KPI : "N" si années exactes, "N+" sinon — Profil : "N" ou "plus de/over/oltre N" selon la langue
-  //  function updateExperienceLabels(lang){
-  //    const startDate = new Date(2018, 8, 1);
-  //    const now = new Date();
-  //    let years = now.getFullYear() - startDate.getFullYear();
-  //    const hasHadAnniversaryThisYear =
-  //      (now.getMonth() > startDate.getMonth()) ||
-  //      (now.getMonth() === startDate.getMonth() && now.getDate() >= startDate.getDate());
-  //    if (!hasHadAnniversaryThisYear) years -= 1;
-  //    const isExactYear = hasHadAnniversaryThisYear
-  //      ? (now.getMonth() === startDate.getMonth() && now.getDate() === startDate.getDate())
-  //      : false;
-
-  //    const cardLabel = isExactYear ? String(years) : String(years) + '+';
-  //    const prefixByLang = { fr: 'plus de ', en: 'over ', it: 'oltre ' };
-  //    const profilLabel = isExactYear ? String(years) : (prefixByLang[lang] || 'plus de ') + String(years);
-
-  //    const kpiEl = document.getElementById('kpi-years');
-  //    const profilEl = document.getElementById('profil-years');
-  //    if (kpiEl) kpiEl.textContent = cardLabel;
-  //    if (profilEl) profilEl.textContent = profilLabel;
-  //  }
-
-  // ============ CALCUL STATIQUE DE L'EXPÉRIENCE ============
-  function updateExperienceLabels(lang){
-    const kpiEl = document.getElementById('kpi-years');
-    const profilEl = document.getElementById('profil-years');
-
-    if (kpiEl) kpiEl.textContent = '7+';
-    if (profilEl) profilEl.textContent = '7+';
-  }
-
   // ============ APPLICATION DE LA LANGUE ============
   function applyLanguage(lang){
     const dict = translations[lang] || translations.fr;
@@ -1213,7 +1195,7 @@ segmentations clients (RFM, RCU, e-commerce)",
     document.querySelectorAll('.lang-option').forEach(btn => {
       btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
     });
-    updateExperienceLabels(lang);
+
     updateMailtoLinks(dict);
     try { localStorage.setItem('site-lang', lang); } catch(e){}
   }
