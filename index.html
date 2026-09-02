@@ -10,7 +10,535 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<style>
+  :root{
+    --ink:#142433;
+    --ink-2:#1c3348;
+    --paper:#F5F6F3;
+    --paper-dim:#EAEBE5;
+    --card:#FFFFFF;
+    --charcoal:#1B1F24;
+    --muted:#5B6472;
+    --gold:#C68A2E;
+    --teal:#1F6F63;
+    --line:#DADDD6;
+    --line-dark:#2A415A;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter', sans-serif;
+    background:var(--paper);
+    color:var(--charcoal);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .display{font-family:'Fraunces', serif;}
+  a{color:inherit;}
+  .wrap{max-width:1040px; margin:0 auto; padding:0 32px;}
+  @media (max-width:640px){.wrap{padding:0 20px;}}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+    color:#EDEFEA;
+    padding:72px 0 0 0;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size:44px 44px;
+    pointer-events:none;
+  }
+  .hero-inner{position:relative; z-index:1;}
+  .eyebrow{
+    font-size:12.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:600;
+    margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:7px; height:7px; border-radius:50%;
+    background:var(--gold);
+    display:inline-block;
+  }
+  h1.name{
+    font-size:clamp(40px, 7vw, 68px);
+    font-weight:600;
+    line-height:1.02;
+    letter-spacing:-0.01em;
+    margin-bottom:14px;
+  }
+  .role-line{
+    font-size:clamp(17px, 2.4vw, 21px);
+    color:#B9C4CE;
+    font-weight:400;
+    margin-bottom:8px;
+  }
+  .role-line strong{color:#EDEFEA; font-weight:500;}
+  .contact-list{
+    margin-bottom:44px;
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+  }
+  .contact-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:14px;
+    color:#8695A3;
+  }
+  .contact-item svg{
+    width:15px; height:15px;
+    flex-shrink:0;
+    stroke:#7E8FA0;
+  }
+  .contact-item a{color:#8695A3; text-decoration:none;}
+  .contact-item a:hover{color:#EDEFEA;}
+
+  /* KPI tiles — the signature element */
+  .kpi-grid{
+    display:grid;
+    grid-template-columns:repeat(6, 1fr);
+    border-top:1px solid rgba(255,255,255,.14);
+    border-left:1px solid rgba(255,255,255,.14);
+  }
+  @media (max-width:900px){
+    .kpi-grid{grid-template-columns:repeat(3, 1fr);}
+  }
+  @media (max-width:760px){
+    .kpi-grid{grid-template-columns:repeat(2, 1fr);}
+  }
+  .kpi{
+    border-right:1px solid rgba(255,255,255,.14);
+    border-bottom:1px solid rgba(255,255,255,.14);
+    padding:22px 24px 24px;
+  }
+  .kpi-label{
+    font-size:10.5px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:#7E8FA0;
+    margin-bottom:10px;
+  }
+  .kpi-value{
+    font-family:'Fraunces', serif;
+    font-size:clamp(26px, 3vw, 34px);
+    color:var(--gold);
+    font-weight:600;
+    line-height:1;
+  }
+  .kpi-sub{
+    font-size:12px;
+    color:#8695A3;
+    margin-top:6px;
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:88px 0;}
+  @media (max-width:640px){section{padding:56px 0;}}
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:16px;
+    margin-bottom:40px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:16px;
+  }
+  .section-num{
+    font-size:12px;
+    color:var(--gold);
+    font-weight:600;
+  }
+  .section-title{
+    font-family:'Fraunces', serif;
+    font-size:clamp(24px, 3vw, 30px);
+    font-weight:600;
+  }
+
+  /* ---------- PROFIL ---------- */
+  .profil-grid{
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+    gap:56px;
+  }
+  @media (max-width:760px){.profil-grid{grid-template-columns:1fr; gap:32px;}}
+  .profil-text p{
+    font-size:17px;
+    color:#333B42;
+    margin-bottom:16px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:26px 28px;
+  }
+  .card-label{
+    font-size:11px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:16px;
+  }
+  .contact-row{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px solid var(--line);
+    font-size:14.5px;
+  }
+  .contact-row:last-child{border-bottom:none;}
+  .contact-row span:first-child{color:var(--muted);}
+  .contact-row a{text-decoration:none;}
+  .contact-row a:hover{color:var(--teal);}
+
+  /* ---------- EXPERIENCE (timeline / gantt) ---------- */
+  .exp-item{margin-bottom:40px;}
+  .exp-item:last-child{margin-bottom:0;}
+  .exp-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:6px;
+  }
+  .exp-title{font-size:19px; font-weight:600;}
+  .exp-dates{font-size:12.5px; color:var(--muted);}
+  .exp-company{font-size:14.5px; color:var(--teal); margin-bottom:14px; font-weight:500;}
+  .gantt-track{
+    height:8px;
+    background:var(--paper-dim);
+    border:1px solid var(--line);
+    margin-bottom:16px;
+    overflow:hidden;
+  }
+  .gantt-bar{
+    height:100%;
+    background:var(--gold);
+  }
+  .exp-desc{list-style:none;}
+  .exp-desc li{
+    font-size:15px;
+    color:#3D454C;
+    padding-left:18px;
+    position:relative;
+    margin-bottom:8px;
+  }
+  .exp-desc li::before{
+    content:"—";
+    position:absolute; left:0;
+    color:var(--muted);
+  }
+
+  /* ---------- COMPETENCES ---------- */
+  .skill-group{margin-bottom:30px;}
+  .skill-group:last-child{margin-bottom:0;}
+  .skill-cat{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--muted);
+    margin-bottom:14px;
+    font-weight:600;
+  }
+  .chips{display:flex; flex-wrap:wrap; gap:9px;}
+  .chip{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    padding:7px 13px;
+    border:1px solid var(--line);
+    background:var(--card);
+    color:var(--charcoal);
+  }
+  .chip.accent{border-color:var(--teal); color:var(--teal);}
+
+  /* ---------- FORMATION ---------- */
+  .edu-item{
+    display:flex;
+    gap:24px;
+    padding:18px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .edu-item:last-child{border-bottom:none;}
+  .edu-year{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--gold);
+    width:56px;
+    flex-shrink:0;
+    padding-top:2px;
+  }
+  .edu-title{font-size:15.5px; font-weight:600; margin-bottom:3px;}
+  .edu-school{font-size:13.5px; color:var(--muted);}
+  .badge-progress{
+    display:inline-block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--teal);
+    border:1px solid var(--teal);
+    padding:2px 8px;
+    margin-left:10px;
+    vertical-align:middle;
+  }
+
+  /* ---------- PROJETS ---------- */
+  .proj-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+  }
+  @media (max-width:760px){.proj-grid{grid-template-columns:1fr;}}
+  .proj-card{
+    border:1px dashed var(--line);
+    padding:24px;
+    min-height:170px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    transition:transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+  }
+  .proj-card:hover{
+    transform:translateY(-4px);
+    border:1px solid var(--teal);
+    box-shadow:0 10px 24px rgba(20,36,51,.08);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .proj-card{transition:none;}
+    .proj-card:hover{transform:none;}
+  }
+  .proj-status{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--muted);
+  }
+  .proj-title{font-size:16px; font-weight:600; margin:10px 0 8px;}
+  .proj-desc{font-size:13.5px; color:var(--muted);}
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{
+    background:var(--ink);
+    color:#EDEFEA;
+    padding:72px 0 40px;
+  }
+  .foot-title{
+    font-family:'Fraunces', serif;
+    font-size:clamp(26px, 4vw, 38px);
+    font-weight:600;
+    margin-bottom:20px;
+    max-width:14ch;
+  }
+  .foot-sub{color:#9AA7B3; font-size:15px; margin-bottom:36px; max-width:48ch;}
+  .foot-actions{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:56px;}
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    padding:13px 22px;
+    text-decoration:none;
+    display:inline-block;
+    border:1px solid rgba(255,255,255,.25);
+  }
+  .btn-primary{background:var(--gold); color:var(--ink); border-color:var(--gold); font-weight:600;}
+  .btn-ghost{color:#EDEFEA;}
+  .foot-bottom{
+    border-top:1px solid rgba(255,255,255,.14);
+    padding-top:24px;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:12px;
+    font-size:12.5px;
+    color:#7E8FA0;
+  }
+
+  /* ---------- STICKY NAV ---------- */
+  .site-nav{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:100;
+    background:rgba(20,36,51,.92);
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+    border-bottom:1px solid rgba(255,255,255,.1);
+    height:52px;
+  }
+  .site-nav-inner{
+    max-width:1040px;
+    margin:0 auto;
+    height:100%;
+    padding:0 110px 0 32px;
+    display:flex;
+    align-items:center;
+    gap:28px;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  .site-nav-inner::-webkit-scrollbar{display:none;}
+  @media (max-width:640px){
+    .site-nav-inner{
+      gap:14px;
+      padding:0 90px 0 20px;
+    }
+    .nav-link{font-size:11px;}
+    .site-nav-brand{font-size:13px; margin-right:2px;}
+  }
+  @media (max-width:430px){
+    .site-nav-inner{
+      gap:10px;
+      padding:0 68px 0 16px;
+    }
+    .nav-link{font-size:10px;}
+    .site-nav-brand{display:none;}
+    .lang-btn span{display:none;}
+    .lang-btn{padding:8px;}
+  }
+  @media (max-width:375px){
+    .site-nav-inner{gap:7px; padding:0 58px 0 12px;}
+    .nav-link{font-size:9px;}
+  }
+  @media (max-width:345px){
+    .site-nav-inner{gap:4px; padding:0 50px 0 8px;}
+    .nav-link{font-size:8px;}
+  }
+  .site-nav-brand{
+    font-family:'Fraunces', serif;
+    font-size:15px;
+    font-weight:600;
+    color:#EDEFEA;
+    white-space:nowrap;
+    margin-right:8px;
+    text-decoration:none;
+    cursor:pointer;
+  }
+  .site-nav-brand:hover{color:#C68A2E;}
+  .nav-link{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:.03em;
+    color:#9AA7B3;
+    text-decoration:none;
+    white-space:nowrap;
+    padding:6px 0;
+    border-bottom:2px solid transparent;
+    transition:color .18s ease, border-color .18s ease;
+  }
+  .nav-link:hover{color:#EDEFEA;}
+  .nav-link.active{color:#C68A2E; border-bottom-color:#C68A2E;}
+  .nav-link + .nav-link{position:relative;}
+  .nav-link + .nav-link::before{
+    content:"|";
+    position:absolute;
+    left:-16px;
+    color:#7E8FA0;
+    font-weight:600;
+    pointer-events:none;
+  }
+  @media (max-width:640px){.nav-link + .nav-link::before{left:-9px;}}
+  @media (max-width:430px){.nav-link + .nav-link::before{left:-7px;}}
+  @media (max-width:375px){.nav-link + .nav-link::before{left:-5px;}}
+  @media (max-width:345px){.nav-link + .nav-link::before{left:-3px;}}
+  body{padding-top:52px;}
+
+  /* ---------- BACK TO TOP ---------- */
+  .back-to-top{
+    position:fixed;
+    right:max(24px, calc((100vw - 1040px) / 2 + 24px));
+    bottom:24px;
+    z-index:100;
+    width:42px; height:42px;
+    border-radius:50%;
+    background:#142433;
+    border:1px solid rgba(255,255,255,.18);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(8px);
+    transition:opacity .25s ease, transform .25s ease, visibility .25s;
+  }
+  .back-to-top.visible{
+    opacity:1; visibility:visible; transform:translateY(0);
+  }
+  .back-to-top:hover{background:#1c3348;}
+  .back-to-top svg{width:18px; height:18px; stroke:#C68A2E;}
+  @media (prefers-reduced-motion: reduce){
+    .back-to-top{transition:opacity .01s linear;}
+  }
+
+
+  .lang-switcher{
+    position:absolute;
+    top:50%;
+    right:32px;
+    transform:translateY(-50%);
+  }
+  @media (max-width:640px){.lang-switcher{right:20px;}}
+  @media (max-width:430px){.lang-switcher{right:16px;}}
+  @media (max-width:375px){.lang-switcher{right:12px;}}
+  @media (max-width:345px){.lang-switcher{right:8px;}}
+  .lang-btn{
+    display:flex; align-items:center; gap:6px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.22);
+    color:#EDEFEA;
+    padding:8px 12px;
+    cursor:pointer;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:.04em;
+  }
+  .lang-btn:hover{background:rgba(255,255,255,.12);}
+  .lang-btn svg{width:15px; height:15px; flex-shrink:0;}
+  .lang-menu{
+    position:absolute;
+    top:calc(100% + 6px);
+    right:0;
+    background:var(--ink-2);
+    border:1px solid rgba(255,255,255,.22);
+    min-width:100px;
+    display:none;
+    flex-direction:column;
+  }
+  .lang-switcher.open .lang-menu,
+  .lang-switcher:hover .lang-menu{display:flex;}
+  .lang-option{
+    padding:9px 14px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:#C3CCD3;
+    cursor:pointer;
+    text-align:left;
+    background:none; border:none;
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .lang-option:last-child{border-bottom:none;}
+  .lang-option:hover{background:rgba(255,255,255,.08); color:#EDEFEA;}
+  .lang-option.active{color:var(--gold);}
+
+  /* reveal on scroll */
+  .reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
 </head>
 <body>
 
@@ -92,7 +620,7 @@
       <div class="kpi-sub" data-i18n="kpi_sub_languages">langues professionnelles</div>
     </div>
     <div class="kpi">
-      <div class="kpi-label" data-i18n="kpi_label_certification">Chaîne valeur Data</div>
+      <div class="kpi-label" data-i18n="kpi_label_certification">Certification</div>
       <div class="kpi-value mono" style="font-size:19px; line-height:34px;">End-to-end</div>
       <div class="kpi-sub" data-i18n="kpi_sub_certification">du besoin métier au dashboard</div>
     </div>
@@ -105,13 +633,14 @@
     <h2 class="section-title" data-i18n="section_profil">Profil</h2>
   </div>
   <div class="profil-text">
-    <p data-i18n="profil_p1">Data Analyst avec plus de 7 ans d'expérience dans l'analyse, la structuration et la valorisation de données. Spécialisée dans la datavisualisation, l'amélioration continue et la qualité des données.</p>
+    <p data-i18n="profil_p1">Data Analyst avec <span id="profil-years">7+</span> ans d'expérience dans l'analyse, la structuration et la valorisation de données. Spécialisée dans la datavisualisation, l'amélioration continue et la qualité des données.</p>
     <p data-i18n="profil_p2">Habituée à collaborer avec des équipes pluridisciplinaires, je traduis les besoins en solutions concrètes : reporting automatisé, indicateurs de pilotage, optimisation de processus, accompagnement des utilisateurs.</p>
     <p data-i18n="profil_p3">Une double compétence — analyse de données et pilotage de projet — acquise sur le terrain et complétée par une formation en systèmes d'information et stratégie d'entreprise (Université Clermont Auvergne, HEC Montréal).</p>
   </div>
 </section>
 
-<section class="reveal" id="experience" style="background:var(--paper-dim);">
+
+<section class="wrap reveal" id="experience" style="background:var(--paper-dim); max-width:none; padding:0;">
   <div class="wrap">
     <div class="section-head">
       <span class="section-num mono">02</span>
@@ -349,36 +878,30 @@
       kpi_sub_dashboards: "dashboards déployés",
       kpi_label_languages: "Langues",
       kpi_sub_languages: "langues professionnelles",
-      kpi_label_certification: "Chaîne de valeur Data",
+      kpi_label_certification: "Certification",
       kpi_sub_certification: "du besoin métier au dashboard",
       section_profil: "Profil",
       section_experience: "Expérience",
       section_competences: "Compétences",
       section_formation: "Formation",
       section_projets: "Projets",
-      
+      profil_p1: "Data Analyst avec <span id=\"profil-years\">7+</span> ans d'expérience dans l'analyse, la structuration et la valorisation de données. Spécialisée dans la datavisualisation, l'amélioration continue et la qualité des données.",
+      profil_p2: "Habituée à collaborer avec des équipes pluridisciplinaires, je traduis les besoins en solutions concrètes : reporting automatisé, indicateurs de pilotage, optimisation de processus, accompagnement des utilisateurs.",
+      profil_p3: "Une double compétence — analyse de données et pilotage de projet — acquise sur le terrain et complétée par une formation en systèmes d'information et stratégie d'entreprise (Université Clermont Auvergne, HEC Montréal).",
       exp1_title: "Chargée d'études",
       exp1_dates: "SEPT. 2020 → FÉV. 2026 · 5 ans et 5 mois",
-      exp1_b1: "Recueil, analyse et cadrage des besoins auprès des directions métier",
-      exp1_b2: "Conception, déploiement et maintenance de dashboards Power BI pour le pilotage opérationnel et stratégique",
-      exp1_b3: "Automatisation des processus de reporting : réduction des délais de production et fiabilisation des livrables",
-      exp1_b4: "Mise en place de règles de gestion, documentation et dictionnaires de données",
-      exp1_b5: "Rédaction de documentation fonctionnelle : dictionnaires de données, règles de gestion, processus",
-      exp1_b6: "Amélioration continue de la qualité des données : détection d'anomalies, correction et normalisation",
-      exp1_b7: "Formation et accompagnement des utilisateurs : ateliers, support et guides",
-      
+      exp1_b1: "Recueil et analyse des besoins métiers auprès de multiples parties prenantes.",
+      exp1_b2: "Conception et déploiement de dashboards Power BI pour le pilotage de la performance. Création de 20+ tableaux de bord Power BI pour le pilotage de la performance.",
+      exp1_b3: "Structuration et automatisation des processus de reporting, réduisant les délais de production et fiabilisant les livrables.",
+      exp1_b4: "Accompagnement des utilisateurs : formation, support, documentation.",
       exp2_title: "Gestionnaire Master Data",
       exp2_dates: "FÉV. 2019 → JAN. 2020 · 11 mois",
-      exp2_b1: "Analyse de données et production de reporting pour différents services métiers",
-      exp2_b2: "Exploitation et interrogation de bases de données via SQL",
-      exp2_b3: "Participation à la compréhension des besoins métiers et à leur traduction analytique",
-
+      exp2_b1: "Analyse de données et production de reportings pour différents services métiers.",
+      exp2_b2: "Exploitation et interrogation de bases de données via SQL.",
       exp3_title: "Data Miner",
       exp3_dates: "MARS 2018 → FÉV. 2019 · 11 mois",
-      exp3_b1: "Réalisation d'analyses ad hoc et de classements de points de vente pour fournir des éléments d'aide à la décision",
-      exp3_b2: "Contribution à l'élaboration d'un score d'appétence au e-commerce : échantillonnage, validation, transformation des variables et préparation d'une régression logistique",
-      exp3_b3: "Conception et actualisation de reporting de pilotage : ventes, performance produits, magasins et e-commerce, segmentations clients (RFM, RCU, e-commerce), avec restitutions Excel",
-
+      exp3_b1: "Gestion et évolution de reportings existants ; analyse de données clients et produits.",
+      exp3_b2: "Réponse à des problématiques métiers via des requêtes SQL.",
       skillcat_soft: "Soft skills",
       skillcat_langues: "Langues",
       chip_besoins: "Recueil des besoins métiers",
@@ -445,23 +968,23 @@
       kpi_sub_dashboards: "dashboards deployed",
       kpi_label_languages: "Languages",
       kpi_sub_languages: "professional languages",
-      kpi_label_certification: "Data Value Chain",
+      kpi_label_certification: "Certification",
       kpi_sub_certification: "from business need to dashboard",
       section_profil: "Profile",
       section_experience: "Experience",
       section_competences: "Skills",
       section_formation: "Education",
       section_projets: "Projects",
-      profil_p1: "Data Analyst with more than 7 years of experience in data analysis, structuring, and value creation. Specialized in data visualization, continuous improvement, and data quality.",
+      profil_p1: "Data Analyst with <span id=\"profil-years\">7+</span> years of experience in data analysis, structuring, and value creation. Specialized in data visualization, continuous improvement, and data quality.",
       profil_p2: "Used to working with cross-functional teams, I translate business needs into concrete solutions: automated reporting, performance indicators, process optimization, user support.",
       profil_p3: "A dual expertise — data analysis and project management — built on the job and complemented by training in information systems and corporate strategy (Université Clermont Auvergne, HEC Montréal).",
-      exp1_title: "Chargée d'études",
+      exp1_title: "Data Analyst",
       exp1_dates: "SEPT. 2020 → FEB. 2026 · 5 years 5 months",
       exp1_b1: "Gathered and analyzed business needs from multiple stakeholders.",
       exp1_b2: "Designed and deployed Power BI dashboards to support performance management. Created 20+ Power BI dashboards to support performance management.",
       exp1_b3: "Structured and automated reporting processes, reducing production times and improving deliverable reliability.",
       exp1_b4: "Supported end users through training, assistance, and documentation.",
-      exp2_title: "Gestionnaire Master Data",
+      exp2_title: "Master Data Analyst",
       exp2_dates: "FEB. 2019 → JAN. 2020 · 11 months",
       exp2_b1: "Analyzed data and produced reports for various business departments.",
       exp2_b2: "Queried and maintained databases using SQL.",
@@ -535,23 +1058,23 @@
       kpi_sub_dashboards: "dashboard realizzate",
       kpi_label_languages: "Lingue",
       kpi_sub_languages: "lingue professionali",
-      kpi_label_certification: "Catena del valore dei dati",
+      kpi_label_certification: "Certificazione",
       kpi_sub_certification: "dall'esigenza al dashboard",
       section_profil: "Profilo",
       section_experience: "Esperienza",
       section_competences: "Competenze",
       section_formation: "Formazione",
       section_projets: "Progetti",
-      profil_p1: "Data Analyst con più di 7 anni di esperienza nell'analisi, strutturazione e valorizzazione dei dati. Specializzata in data visualization, miglioramento continuo e qualità dei dati.",
+      profil_p1: "Data Analyst con <span id=\"profil-years\">7+</span> anni di esperienza nell'analisi, strutturazione e valorizzazione dei dati. Specializzata in data visualization, miglioramento continuo e qualità dei dati.",
       profil_p2: "Abituata a collaborare con team multidisciplinari, traduco le esigenze in soluzioni concrete: reportistica automatizzata, indicatori di performance, ottimizzazione dei processi, supporto agli utenti.",
       profil_p3: "Una doppia competenza — analisi dei dati e gestione di progetto — acquisita sul campo e completata da una formazione in sistemi informativi e strategia aziendale (Université Clermont Auvergne, HEC Montréal).",
-      exp1_title: "Chargée d'études",
+      exp1_title: "Data Analyst",
       exp1_dates: "SET. 2020 → FEB. 2026 · 5 anni e 5 mesi",
       exp1_b1: "Raccolta e analisi delle esigenze aziendali presso molteplici interlocutori.",
       exp1_b2: "Progettazione e implementazione di dashboard Power BI per il monitoraggio delle performance. Creazione di oltre 20 dashboard Power BI per il monitoraggio delle performance.",
       exp1_b3: "Strutturazione e automazione dei processi di reportistica, riducendo i tempi di produzione e migliorando l'affidabilità dei risultati.",
       exp1_b4: "Supporto agli utenti: formazione, assistenza, documentazione.",
-      exp2_title: "Gestionnaire Master Data",
+      exp2_title: "Master Data Analyst",
       exp2_dates: "FEB. 2019 → GEN. 2020 · 11 mesi",
       exp2_b1: "Analisi dei dati e produzione di report per diversi reparti aziendali.",
       exp2_b2: "Interrogazione e gestione di database tramite SQL.",
